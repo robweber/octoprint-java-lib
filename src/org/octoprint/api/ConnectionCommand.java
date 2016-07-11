@@ -2,6 +2,12 @@ package org.octoprint.api;
 
 import org.json.simple.JSONObject;
 
+/**
+ * @author rweber
+ *
+ * Implementation of commands found under the Connection (http://docs.octoprint.org/en/master/api/connection.html) endpoint. 
+ *
+ */
 public class ConnectionCommand extends OctoPrintCommand {
 
 	public ConnectionCommand(OctoPrintInstance requestor) {

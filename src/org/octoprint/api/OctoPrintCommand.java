@@ -1,5 +1,10 @@
 package org.octoprint.api;
 
+/**
+ * @author rweber
+ * 
+ * Command classes (endpoints) extend this class to provide functionality to the library 
+ */
 public abstract class OctoPrintCommand {
 	protected OctoPrintInstance g_comm = null;
 	protected String g_base = null;

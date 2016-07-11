@@ -5,6 +5,11 @@ import org.json.simple.JSONAware;
 import org.json.simple.JSONObject;
 import org.octoprint.api.util.JSONLoader;
 
+/**
+ * @author rweber
+ * 
+ * A representation of a File on the OctoPrint server
+ */
 public class OctoPrintFile implements JSONAware, JSONLoader {
 	private JSONObject m_data = null;
 	
@@ -16,6 +21,9 @@ public class OctoPrintFile implements JSONAware, JSONLoader {
 		return m_data.get("name").toString();
 	}
 	
+	/**
+	 * @return the print time (in seconds) based on gcode analysis
+	 */
 	public double getPrintTime(){
 		double result = 0;
 		

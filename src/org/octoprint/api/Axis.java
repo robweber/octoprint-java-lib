@@ -14,6 +14,12 @@ public enum Axis {
 		return m_axis;
 	}
 	
+	/**
+	 * A helper method to convert a passed in string value to an Axis enum 
+	 * 
+	 * @param t axis name as a string
+	 * @return conversion of string to enum value
+	 */
 	public static Axis getAxis(String t){
 		if(t.toLowerCase().equals("x"))
 		{

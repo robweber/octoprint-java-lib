@@ -4,6 +4,11 @@ import org.json.simple.JSONAware;
 import org.json.simple.JSONObject;
 import org.octoprint.api.util.JSONLoader;
 
+/**
+ * @author rweber
+ * 
+ * Representation of an OctoPrint Job object. 
+ */
 public class OctoPrintJob implements JSONAware, JSONLoader {
 	private JSONObject m_job = null;
 	private JobProgress m_progress = null;
@@ -33,6 +38,9 @@ public class OctoPrintJob implements JSONAware, JSONLoader {
 		return ((Double)m_job.get("estimatedPrintTime"));
 	}
 	
+	/**
+	 * @return current job progress
+	 */
 	public JobProgress getJobProgress(){
 		return m_progress;
 	}

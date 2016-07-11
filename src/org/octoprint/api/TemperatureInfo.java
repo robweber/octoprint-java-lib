@@ -5,6 +5,10 @@ import org.json.simple.JSONObject;
 import org.octoprint.api.util.JSONLoader;
 
 
+/**
+ * @author rweber
+ * Temperature information as provided by an extruder or the print bed
+ */
 public class TemperatureInfo implements JSONAware, JSONLoader{
 	private String m_name = null;
 	private JSONObject m_data = null;

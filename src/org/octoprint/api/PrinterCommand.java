@@ -4,6 +4,10 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.octoprint.api.util.JSONUtils;
 
+/**
+ * @author rweber
+ * Implementation of commands found under the Printer (http://docs.octoprint.org/en/master/api/printer.html) endpoint. 
+ */
 public class PrinterCommand extends OctoPrintCommand {
 	
 	public PrinterCommand(OctoPrintInstance requestor) {
@@ -22,6 +26,9 @@ public class PrinterCommand extends OctoPrintCommand {
 		return g_comm.executeUpdate(request);
 	}
 	
+	/**
+	 * @return the current state of the printer 
+	 */
 	public PrinterState getCurrentState(){
 		PrinterState result = null;
 		
@@ -35,6 +42,10 @@ public class PrinterCommand extends OctoPrintCommand {
 		return result;
 	}
 	
+	/**
+	 * @param num the extruder num to check (0 indexex)
+	 * @return temperature information for this extruder, null if it doesn't exist
+	 */
 	public TemperatureInfo getExtruderTemp(int num){
 		TemperatureInfo result = null;	//may be null if num doesn't exist
 		
@@ -55,6 +66,9 @@ public class PrinterCommand extends OctoPrintCommand {
 		return result;
 	}
 	
+	/**
+	 * @return temperature information for the print bed
+	 */
 	public TemperatureInfo getBedTemp(){
 		TemperatureInfo result = null;
 		
@@ -70,6 +84,12 @@ public class PrinterCommand extends OctoPrintCommand {
 		return result;
 	}
 	
+	/**
+	 * @param command the command to send (set temp, extrude, offset, etc)
+	 * @param extruder the index of the extruder (0 indexed)
+	 * @param value the value of the command (temperature, amount to extrude, etc)
+	 * @return if this operation succeeded
+	 */
 	public boolean sendExtruderCommand(ToolCommand command, int extruder, int value){
 		boolean result = true;
 		JSONObject params = null;
@@ -117,7 +137,12 @@ public class PrinterCommand extends OctoPrintCommand {
 		return result;
 	}
 	
-	public boolean setBedTemp(ToolCommand command, int value){
+	/**
+	 * @param command the command to send (only Target and Offset are allowed)
+	 * @param value the value of the command(temp, offset)
+	 * @return if this operation succeeded
+	 */
+	public boolean sendBedCommand(ToolCommand command, int value){
 		boolean result = false;
 		
 		//the bed can only use these two commands
@@ -142,6 +167,11 @@ public class PrinterCommand extends OctoPrintCommand {
 		return result;
 	}
 	
+	/**
+	 * move all axis to the home position
+	 * 
+	 * @return if this command succeeded
+	 */
 	public boolean moveHome(){
 		OctoPrintHttpRequest request = this.createRequest("printhead");
 		
@@ -162,6 +192,13 @@ public class PrinterCommand extends OctoPrintCommand {
 		return g_comm.executeUpdate(request);
 	}
 	
+	/**
+	 * Move a given axis this amount
+	 * 
+	 * @param axis the axis to move
+	 * @param amount the amount to movie it (positive or negative)
+	 * @return if this operation succeeded
+	 */
 	public boolean moveOnAxis(Axis axis, double amount){
 		OctoPrintHttpRequest request = this.createRequest("printhead");
 		

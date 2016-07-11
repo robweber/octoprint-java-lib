@@ -2,6 +2,11 @@ package org.octoprint.api;
 
 import org.json.simple.JSONObject;
 
+/**
+ * @author rweber
+ * 
+ *  An object to encapsulate the http request 
+ */
 public class OctoPrintHttpRequest {
 	private String m_url = null;
 	private String m_type = null;

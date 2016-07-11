@@ -8,6 +8,11 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import sun.net.www.protocol.http.HttpURLConnection;
 
+/**
+ * @author rweber
+ * 
+ *  Stores information on the OctoPrint instance for communication. Used by all OctoPrintCommand classes to send/receive data. 
+ */
 public class OctoPrintInstance {
 	private String m_url = null;
 	private String m_key = null;

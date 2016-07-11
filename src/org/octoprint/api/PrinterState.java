@@ -4,6 +4,11 @@ import org.json.simple.JSONAware;
 import org.json.simple.JSONObject;
 import org.octoprint.api.util.JSONLoader;
 
+/**
+ * @author rweber
+ * 
+ *  Represents the current state of the printer
+ */
 public class PrinterState implements JSONAware, JSONLoader {
 	private JSONObject m_json = null;
 	private String m_text = null;
