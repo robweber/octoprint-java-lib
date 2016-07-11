@@ -1,0 +1,39 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.octoprint.api</groupId>
+  <artifactId>octoprint-java-lib</artifactId>
+  <version>0.0.1</version>
+  <name>OctoPrint Java Lib</name>
+  <description>Provides Communication with OctoPrint via the REST API in Java</description>
+  <developers>
+      <developer>
+          <id>robweber</id>
+          <name>Rob Weber</name>
+          <roles>
+              <role>architect</role>
+              <role>developer</role>
+          </roles>
+      </developer>
+  </developers>
+  <build>
+    <sourceDirectory>src</sourceDirectory>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.3</version>
+        <configuration>
+          <source>1.7</source>
+          <target>1.7</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <dependencies>
+  	<dependency>
+  		<groupId>com.googlecode.json-simple</groupId>
+  		<artifactId>json-simple</artifactId>
+  		<version>1.1.1</version>
+  	</dependency>
+  </dependencies>
+  <url>https://github.com/robweber/octoprint-java-lib/tree/master</url>
+</project>
