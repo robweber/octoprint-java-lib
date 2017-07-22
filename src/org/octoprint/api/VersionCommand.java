@@ -3,8 +3,9 @@ package org.octoprint.api;
 import org.json.simple.JSONObject;
 
 /**
- * @author rweber
  * Implementation of the Version (http://docs.octoprint.org/en/master/api/version.html) endpoint 
+ * 
+ * @author rweber
  */
 public class VersionCommand extends OctoPrintCommand{
 	

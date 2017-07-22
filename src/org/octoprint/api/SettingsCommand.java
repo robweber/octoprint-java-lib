@@ -7,9 +7,10 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 /**
+ * Implemention of the settings endpoint - this doesn't appear to be documented well in the general documentation. Check here: https://github.com/foosel/OctoPrint/blob/master/src/octoprint/server/api/settings.py
+ * 
  * @author rweber
  * 
- *  Implemention of the settings endpoint - this doesn't appear to be documented well in the general documentation. Check here: https://github.com/foosel/OctoPrint/blob/master/src/octoprint/server/api/settings.py
  */
 public class SettingsCommand extends OctoPrintCommand {
 

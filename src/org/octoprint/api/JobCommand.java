@@ -4,8 +4,9 @@ import org.json.simple.JSONObject;
 import org.octoprint.api.util.JSONUtils;
 
 /**
- * @author rweber
  * Implementation of commands found under the Job (http://docs.octoprint.org/en/master/api/job.html) endpoint. 
+ * 
+ * @author rweber
  */
 public class JobCommand extends OctoPrintCommand {
 	

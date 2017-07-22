@@ -5,8 +5,10 @@ import org.json.simple.JSONObject;
 import org.octoprint.api.util.JSONUtils;
 
 /**
- * @author rweber
  * Implementation of commands found under the Printer (http://docs.octoprint.org/en/master/api/printer.html) endpoint. 
+ * 
+ * @author rweber
+ * 
  */
 public class PrinterCommand extends OctoPrintCommand {
 	

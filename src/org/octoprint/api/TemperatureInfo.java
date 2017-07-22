@@ -6,8 +6,8 @@ import org.octoprint.api.util.JSONLoader;
 
 
 /**
- * @author rweber
  * Temperature information as provided by an extruder or the print bed http://docs.octoprint.org/en/master/api/datamodel.html#sec-api-datamodel-printer-tempdata
+ * @author rweber
  */
 public class TemperatureInfo implements JSONAware, JSONLoader{
 	private String m_name = null;

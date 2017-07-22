@@ -6,9 +6,9 @@ import org.octoprint.api.util.JSONLoader;
 
 
 /**
- * @author rweber
- * 
  * Temperature Profile information as provided by OctoPrint Settings - currently doesn't handle more than one extruder!
+ * 
+ * @author rweber
  */
 public class TemperatureProfile implements JSONAware, JSONLoader {
 	private JSONObject m_json = null;

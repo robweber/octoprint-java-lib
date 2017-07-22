@@ -1,9 +1,9 @@
 package org.octoprint.api;
 
 /**
- * @author rweber
- *
  * Represents a 3d printer Axis (x,y,z) 
+ * 
+ * @author rweber
  */
 public enum Axis {
 	X("x"),

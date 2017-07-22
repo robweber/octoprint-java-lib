@@ -3,9 +3,10 @@ package org.octoprint.api;
 import org.json.simple.JSONObject;
 
 /**
- * @author rweber
+ * An object to encapsulate the http request 
  * 
- *  An object to encapsulate the http request 
+ * @author rweber
+ *  
  */
 public class OctoPrintHttpRequest {
 	private String m_url = null;

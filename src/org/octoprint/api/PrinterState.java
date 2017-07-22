@@ -5,9 +5,10 @@ import org.json.simple.JSONObject;
 import org.octoprint.api.util.JSONLoader;
 
 /**
+ * Represents the current state of the printer http://docs.octoprint.org/en/master/api/datamodel.html#sec-api-datamodel-printer-state
+ * 
  * @author rweber
  * 
- *  Represents the current state of the printer http://docs.octoprint.org/en/master/api/datamodel.html#sec-api-datamodel-printer-state
  */
 public class PrinterState implements JSONAware, JSONLoader {
 	private JSONObject m_json = null;

@@ -5,9 +5,9 @@ import org.json.simple.JSONObject;
 import org.octoprint.api.util.JSONLoader;
 
 /**
- * @author rweber
- *
  * Representation of the connection state of the printer 
+ * 
+ * @author rweber
  */
 public class ConnectionState implements JSONAware, JSONLoader {
 	private JSONObject m_json = null;

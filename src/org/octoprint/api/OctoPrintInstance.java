@@ -9,9 +9,10 @@ import org.json.simple.JSONValue;
 import sun.net.www.protocol.http.HttpURLConnection;
 
 /**
+ * Stores information on the OctoPrint instance for communication. Used by all OctoPrintCommand classes to send/receive data. 
+ * 
  * @author rweber
  * 
- *  Stores information on the OctoPrint instance for communication. Used by all OctoPrintCommand classes to send/receive data. 
  */
 public class OctoPrintInstance {
 	private String m_url = null;

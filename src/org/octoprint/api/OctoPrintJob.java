@@ -5,9 +5,10 @@ import org.json.simple.JSONObject;
 import org.octoprint.api.util.JSONLoader;
 
 /**
+ * Representation of an OctoPrint Job object. http://docs.octoprint.org/en/master/api/datamodel.html#sec-api-datamodel-jobs-job
+ * 
  * @author rweber
  * 
- * Representation of an OctoPrint Job object. http://docs.octoprint.org/en/master/api/datamodel.html#sec-api-datamodel-jobs-job
  */
 public class OctoPrintJob implements JSONAware, JSONLoader {
 	private JSONObject m_job = null;
