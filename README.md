@@ -3,11 +3,11 @@ This is a very simple wrapper to provide Java based communication to an OctoPrin
 
 Please note that not all API functions are implemented here but most of them for doing common operations are ready to go. Pull Requests for additional functionality are welcome. 
 
-##Required Libs
+## Required Libs
 
 The json-simple library is required to encode/decode JSON objects. If you don't want to use maven here is a link: https://github.com/fangyidong/json-simple
 
-##How to Use It
+## How to Use It
 
 To use it simply create an OcotPrintInstance within your Java code and then use it to initate one of the Command classes.
 
