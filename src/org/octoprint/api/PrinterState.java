@@ -7,7 +7,7 @@ import org.octoprint.api.util.JSONLoader;
 /**
  * @author rweber
  * 
- *  Represents the current state of the printer
+ *  Represents the current state of the printer http://docs.octoprint.org/en/master/api/datamodel.html#sec-api-datamodel-printer-state
  */
 public class PrinterState implements JSONAware, JSONLoader {
 	private JSONObject m_json = null;

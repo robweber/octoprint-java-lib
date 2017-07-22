@@ -8,7 +8,7 @@ import org.octoprint.api.util.JSONLoader;
 /**
  * @author rweber
  * 
- * A representation of a File on the OctoPrint server
+ * A representation of a File on the OctoPrint server http://docs.octoprint.org/en/master/api/datamodel.html#sec-api-datamodel-files-file 
  */
 public class OctoPrintFile implements JSONAware, JSONLoader {
 	private JSONObject m_data = null;
