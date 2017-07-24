@@ -18,6 +18,9 @@ public class OctoPrintJob implements JSONAware, JSONLoader {
 
 	}
 
+	/**
+	 * @return the name of the file
+	 */
 	public String getName(){
 		String result = null;
 		
@@ -35,8 +38,11 @@ public class OctoPrintJob implements JSONAware, JSONLoader {
 		return result;
 	}
 	
-	public double getEstimatedPrintTime(){
-		return ((Double)m_job.get("estimatedPrintTime"));
+	/**
+	 * @return the estimated print time for the file, in seconds
+	 */
+	public Long getEstimatedPrintTime(){
+		return ((Long)m_job.get("estimatedPrintTime"));
 	}
 	
 	/**
@@ -69,7 +75,7 @@ public class OctoPrintJob implements JSONAware, JSONLoader {
 			
 		}
 		
-		public double percentComplete(){
+		public Double percentComplete(){
 			return (Double)m_json.get("completion");
 		}
 		
