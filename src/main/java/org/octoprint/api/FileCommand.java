@@ -4,7 +4,7 @@ import org.json.simple.JSONObject;
 import org.octoprint.api.util.JSONUtils;
 
 /**
- *  Implementation of commands found under the File Operations (http://docs.octoprint.org/en/master/api/fileops.html) endpoint. 
+ *  Implementation of commands found under the File Operations (http://docs.octoprint.org/en/master/api/files.html) endpoint. 
  * 
  * @author rweber
  */
