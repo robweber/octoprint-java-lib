@@ -2,6 +2,11 @@ package org.octoprint.api;
 
 import org.json.simple.JSONObject;
 
+/**
+ * Implementation of the File type as described in the API http://docs.octoprint.org/en/master/api/datamodel.html#files
+ * 
+ * @author rweber
+ */
 public class OctoPrintFile extends OctoPrintFileInformation {
 
 	public OctoPrintFile(FileType t, JSONObject json) {

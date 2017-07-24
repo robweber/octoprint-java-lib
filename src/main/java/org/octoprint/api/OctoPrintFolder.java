@@ -8,6 +8,11 @@ import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+/**
+ * Implementation of the folder type as described in the API http://docs.octoprint.org/en/master/api/datamodel.html#folders
+ * 
+ * @author rweber
+ */
 public class OctoPrintFolder extends OctoPrintFileInformation {
 	private List<OctoPrintFileInformation> m_children = null;
 	
