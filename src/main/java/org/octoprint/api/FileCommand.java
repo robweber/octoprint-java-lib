@@ -1,7 +1,10 @@
 package org.octoprint.api;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.octoprint.api.util.JSONUtils;
 
 /**
  *  Implementation of commands found under the File Operations (http://docs.octoprint.org/en/master/api/files.html) endpoint. 
@@ -15,6 +18,51 @@ public class FileCommand extends OctoPrintCommand {
 		
 	}
 
+	private OctoPrintFileInformation createFile(JSONObject json){
+		OctoPrintFileInformation result = null;
+		
+		//figure out what kind of file this is
+		FileType t = FileType.findType(json.get("type").toString());
+	
+		if(t == FileType.FOLDER)
+		{
+			result = new OctoPrintFolder(t,json);
+		}
+		else
+		{
+			result = new OctoPrintFile(t,json);
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * Returns a list of all files (folders and files) from the root. checks local storage only
+	 * 
+	 * @return a list of all files in the root folder, null if an error occurs
+	 */
+	public List<OctoPrintFileInformation> listFiles(){
+		List<OctoPrintFileInformation> result = null;
+		
+		//get a list of all the files
+		JSONObject json = this.g_comm.executeQuery(this.createRequest("local?recursive=true"));
+		
+		if(json != null)
+		{
+			result = new ArrayList<OctoPrintFileInformation>();
+			
+			JSONArray children = (JSONArray)json.get("files");
+			
+			for(int count = 0; count < children.size(); count ++)
+			{
+				//for each file create the object and add to the array
+				result.add(this.createFile((JSONObject)children.get(count)));
+			}
+		}
+		
+		return result;
+	}
+	
 	/**
 	 * Returns an object with information on the given filename
 	 * 
@@ -29,17 +77,7 @@ public class FileCommand extends OctoPrintCommand {
 		
 		if(json != null)
 		{
-			//figure out what kind of file this is
-			FileType t = FileType.findType(json.get("type").toString());
-		
-			if(t == FileType.FOLDER)
-			{
-				result = new OctoPrintFolder(t,json);
-			}
-			else
-			{
-				result = new OctoPrintFile(t,json);
-			}
+			result = this.createFile(json);
 		}
 		
 		return result;
