@@ -25,14 +25,14 @@ public class OctoPrintFile implements JSONAware, JSONLoader {
 	/**
 	 * @return the print time (in seconds) based on gcode analysis
 	 */
-	public double getPrintTime(){
-		double result = 0;
+	public Long getPrintTime(){
+		Long result = new Long(0);
 		
 		JSONObject gcode = (JSONObject)m_data.get("gcodeAnalysis");
 		
 		if(gcode != null)
 		{
-			result = (Double)gcode.get("estimatedPrintTime");
+			result = (Long)gcode.get("estimatedPrintTime");
 		}
 		
 		return result;
