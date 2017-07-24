@@ -21,15 +21,25 @@ public class FileCommand extends OctoPrintCommand {
 	 * @param filename the name of the file, assumes it is local and not on the SD card
 	 * @return info about the file, will return null if that file does not exist
 	 */
-	public OctoPrintFile getFileInfo(String filename){
-		OctoPrintFile result = null;	//returns null if file does not exist
+	public OctoPrintFileInformation getFileInfo(String filename){
+		OctoPrintFileInformation result = null;	//returns null if file does not exist
 		
 		//try and find the file
-		JSONObject json = this.g_comm.executeQuery(this.createRequest("local/" + filename));
+		JSONObject json = this.g_comm.executeQuery(this.createRequest("local/" + filename + "?recursive=true"));
 		
 		if(json != null)
 		{
-			result = JSONUtils.createObject(json, OctoPrintFile.class.getName());
+			//figure out what kind of file this is
+			FileType t = FileType.findType(json.get("type").toString());
+		
+			if(t == FileType.FOLDER)
+			{
+				result = new OctoPrintFolder(t,json);
+			}
+			else
+			{
+				result = new OctoPrintFile(t,json);
+			}
 		}
 		
 		return result;
