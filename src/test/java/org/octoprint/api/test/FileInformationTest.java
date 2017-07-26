@@ -5,9 +5,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.octoprint.api.FileCommand;
-import org.octoprint.api.FileType;
-import org.octoprint.api.OctoPrintFileInformation;
 import org.octoprint.api.OctoPrintInstance;
+import org.octoprint.api.model.FileType;
+import org.octoprint.api.model.OctoPrintFileInformation;
 import org.octoprint.api.test.util.JSONAnswer;
 import org.octoprint.api.test.util.NullAnswer;
 

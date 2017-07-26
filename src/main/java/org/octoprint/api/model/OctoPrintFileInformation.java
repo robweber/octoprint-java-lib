@@ -1,4 +1,4 @@
-package org.octoprint.api;
+package org.octoprint.api.model;
 
 import org.json.simple.JSONAware;
 

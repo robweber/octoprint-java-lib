@@ -1,4 +1,4 @@
-package org.octoprint.api;
+package org.octoprint.api.model;
 
 public enum FileType {
 	MODEL,MACHINECODE,FOLDER;

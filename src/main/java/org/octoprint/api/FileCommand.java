@@ -5,6 +5,10 @@ import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.octoprint.api.model.FileType;
+import org.octoprint.api.model.OctoPrintFile;
+import org.octoprint.api.model.OctoPrintFileInformation;
+import org.octoprint.api.model.OctoPrintFolder;
 
 /**
  *  Implementation of commands found under the File Operations (http://docs.octoprint.org/en/master/api/files.html) endpoint. 

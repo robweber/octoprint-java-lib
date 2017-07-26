@@ -1,4 +1,4 @@
-package org.octoprint.api;
+package org.octoprint.api.model;
 
 /**
  * Represents a 3d printer Axis (x,y,z) 

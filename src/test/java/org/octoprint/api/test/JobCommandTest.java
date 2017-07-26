@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.octoprint.api.JobCommand;
 import org.octoprint.api.OctoPrintInstance;
-import org.octoprint.api.OctoPrintJob.JobProgress;
+import org.octoprint.api.model.OctoPrintJob.JobProgress;
 import org.octoprint.api.test.util.JSONAnswer;
 
 /**

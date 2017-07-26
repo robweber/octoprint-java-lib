@@ -1,6 +1,7 @@
 package org.octoprint.api;
 
 import org.json.simple.JSONObject;
+import org.octoprint.api.model.OctoPrintJob;
 import org.octoprint.api.util.JSONUtils;
 
 /**

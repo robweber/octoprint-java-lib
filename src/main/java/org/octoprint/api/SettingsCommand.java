@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.octoprint.api.model.TemperatureProfile;
 
 /**
  * Implemention of the settings endpoint - this doesn't appear to be documented well in the general documentation. Check here: https://github.com/foosel/OctoPrint/blob/master/src/octoprint/server/api/settings.py

@@ -2,6 +2,9 @@ package org.octoprint.api;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.octoprint.api.model.Axis;
+import org.octoprint.api.model.PrinterState;
+import org.octoprint.api.model.TemperatureInfo;
 import org.octoprint.api.util.JSONUtils;
 
 /**

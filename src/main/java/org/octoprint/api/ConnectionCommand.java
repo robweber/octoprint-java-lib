@@ -1,6 +1,7 @@
 package org.octoprint.api;
 
 import org.json.simple.JSONObject;
+import org.octoprint.api.model.ConnectionState;
 
 /**
  * Implementation of commands found under the Connection (http://docs.octoprint.org/en/master/api/connection.html) endpoint.
