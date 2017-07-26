@@ -1,51 +1,52 @@
 package org.octoprint.api;
 
-import org.json.simple.JSONAware;
-
 import org.json.simple.JSONObject;
-import org.octoprint.api.util.JSONLoader;
 
 /**
- * A representation of a File on the OctoPrint server http://docs.octoprint.org/en/master/api/datamodel.html#sec-api-datamodel-files-file 
+ * Implementation of the File type as described in the API http://docs.octoprint.org/en/master/api/datamodel.html#files
  * 
  * @author rweber
- * 
  */
-public class OctoPrintFile implements JSONAware, JSONLoader {
-	private JSONObject m_data = null;
-	
-	public OctoPrintFile() {
-		
+public class OctoPrintFile extends OctoPrintFileInformation {
+
+	public OctoPrintFile(FileType t, JSONObject json) {
+		super(t,json);
 	}
 
-	public String getName(){
-		return m_data.get("name").toString();
+	public String getHash(){
+		return m_data.get("hash").toString();
+	}
+	
+	/**
+	 * @return the size in bytes
+	 */
+	public Long getSize(){
+		return (Long)m_data.get("size");
+	}
+	
+	/**
+	 * @return the timestamp of when this file was uploaded return in milliseconds
+	 */
+	public Long getTimestamp(){
+		Long unix = (Long)m_data.get("date");
+		
+		//convert to milliseconds
+		return new Long(unix.longValue() * 1000);
 	}
 	
 	/**
 	 * @return the print time (in seconds) based on gcode analysis
 	 */
-	public double getPrintTime(){
-		double result = 0;
+	public Long getPrintTime(){
+		Long result = new Long(0);
 		
 		JSONObject gcode = (JSONObject)m_data.get("gcodeAnalysis");
 		
 		if(gcode != null)
 		{
-			result = (Double)gcode.get("estimatedPrintTime");
+			result = (Long)gcode.get("estimatedPrintTime");
 		}
 		
 		return result;
 	}
-	
-	@Override
-	public void loadJSON(JSONObject json) {
-		m_data = json;
-	}
-
-	@Override
-	public String toJSONString() {
-		return m_data.toJSONString();
-	}
-
 }

@@ -1,0 +1,29 @@
+{
+  "name": "whistle_v2.gcode",
+  "path": "whistle_v2.gcode",
+  "type": "machinecode",
+  "typePath": ["machinecode", "gcode"],
+  "hash": "...",
+  "size": 1468987,
+  "date": 1378847754,
+  "origin": "local",
+  "refs": {
+    "resource": "http://example.com/api/files/local/whistle_v2.gcode",
+    "download": "http://example.com/downloads/files/local/whistle_v2.gcode"
+  },
+  "gcodeAnalysis": {
+    "estimatedPrintTime": 1188,
+    "filament": {
+      "length": 810,
+      "volume": 5.36
+    }
+  },
+  "print": {
+    "failure": 4,
+    "success": 23,
+    "last": {
+      "date": 1387144346,
+      "success": true
+    }
+  }
+}

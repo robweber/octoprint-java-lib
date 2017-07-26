@@ -1,0 +1,52 @@
+{
+  "name": "folderA",
+  "path": "folderA",
+  "type": "folder",
+  "typePath": ["folder"],
+  "children": [
+    {
+      "name": "test.gcode",
+      "path": "folderA/test.gcode",
+      "type": "machinecode",
+      "typePath": ["machinecode", "gcode"],
+      "hash": "...",
+      "size": 1234,
+      "date": 1378847754,
+      "origin": "local",
+      "refs": {
+        "resource": "http://example.com/api/files/local/folderA/test.gcode",
+        "download": "http://example.com/downloads/files/local/folderA/test.gcode"
+      }
+    },
+    {
+      "name": "subfolder",
+      "path": "folderA/subfolder",
+      "type": "folder",
+      "typePath": ["folder"],
+      "children": [
+        {
+          "name": "test.gcode",
+          "path": "folderA/subfolder/test2.gcode",
+          "type": "machinecode",
+          "typePath": ["machinecode", "gcode"],
+          "hash": "...",
+          "size": 100,
+          "date": 1378847754,
+          "origin": "local",
+          "refs": {
+            "resource": "http://example.com/api/files/local/folderA/subfolder/test2.gcode",
+            "download": "http://example.com/downloads/files/local/folderA/subfolder/test2.gcode"
+          }
+        },
+      ],
+      "size": 100,
+      "refs": {
+        "resource": "http://example.com/api/files/local/folderA/subfolder",
+      }
+    }
+  ],
+  "size": 1334,
+  "refs": {
+    "resource": "http://example.com/api/files/local/folderA",
+  }
+}
