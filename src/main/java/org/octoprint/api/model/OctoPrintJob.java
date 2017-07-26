@@ -3,6 +3,7 @@ package org.octoprint.api.model;
 import org.json.simple.JSONAware;
 import org.json.simple.JSONObject;
 import org.octoprint.api.util.JSONLoader;
+import org.octoprint.api.util.JSONUtils;
 
 /**
  * Representation of an OctoPrint Job object. http://docs.octoprint.org/en/master/api/datamodel.html#sec-api-datamodel-jobs-job
@@ -80,11 +81,11 @@ public class OctoPrintJob implements JSONAware, JSONLoader {
 		}
 		
 		public Long elapsedTime(){
-			return (Long)m_json.get("printTime");
+			return Long.parseLong(m_json.get("printTime").toString());
 		}
 		
 		public Long timeRemaining(){
-			return (Long)m_json.get("printTimeLeft");
+			return Long.parseLong(m_json.get("printTimeLeft").toString());
 		}
 		
 		@Override
