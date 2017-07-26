@@ -1,7 +1,7 @@
 # Octoprint Java Lib
-This is a very simple wrapper to provide Java based communication to an OctoPrint Server using the REST API (http://docs.octoprint.org/en/master/api/)
+This is a very simple wrapper to provide Java based communication to an OctoPrint Server using the [REST API](http://docs.octoprint.org/en/master/api/)
 
-Please note that not all API functions are implemented here but most of them for doing common operations are ready to go. Pull Requests for additional functionality are welcome. 
+Please note that not all API functions are implemented here but most of them for doing common operations are ready to go. Pull Requests for additional functionality are welcome. Javadocs are published on GitHub Pages at [https://robweber.github.io/octoprint-java-lib/](https://robweber.github.io/octoprint-java-lib/) 
 
 ## Required Libs
 
