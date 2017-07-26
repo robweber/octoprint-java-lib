@@ -21,12 +21,12 @@ public class TemperatureProfile implements JSONAware, JSONLoader {
 		return m_json.get("name").toString();
 	}
 	
-	public int getBedTemp(){
-		return Integer.parseInt(m_json.get("bed").toString());
+	public Long getBedTemp(){
+		return new Long(m_json.get("bed").toString());
 	}
 	
-	public int getExtruderTemp(){
-		return Integer.parseInt(m_json.get("extruder").toString());
+	public Long getExtruderTemp(){
+		return new Long(m_json.get("extruder").toString());
 	}
 	
 	@Override 

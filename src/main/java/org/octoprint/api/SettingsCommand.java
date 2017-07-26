@@ -1,14 +1,17 @@
 package org.octoprint.api;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.octoprint.api.model.TemperatureProfile;
+import org.octoprint.api.util.JSONUtils;
 
 /**
- * Implemention of the settings endpoint - this doesn't appear to be documented well in the general documentation. Check here: https://github.com/foosel/OctoPrint/blob/master/src/octoprint/server/api/settings.py
+ * Implemention of the settings endpoint, check here for all fields http://docs.octoprint.org/en/master/api/settings.html
  * 
  * @author rweber
  * 
@@ -20,17 +23,28 @@ public class SettingsCommand extends OctoPrintCommand {
 	}
 
 	/**
+	 * 
+	 * @return all the settings as a full JSON Object, could be null if no connectivity
+	 */
+	public JSONObject getAllSettings(){
+		JSONObject result = this.g_comm.executeQuery(this.createRequest());
+		
+		return result;
+	}
+	
+	/**
 	 * Find all the currently setup temperature profiles 
 	 * 
-	 * @return list of temperature profiles
+	 * @return map of temperature profiles, keys are the profile names
 	 */
-	public List<TemperatureProfile> getTemperatureProfiles(){
-		List<TemperatureProfile> result = new ArrayList<TemperatureProfile>();
+	public Map<String,TemperatureProfile> getTemperatureProfiles(){
+		Map<String,TemperatureProfile> result = new HashMap<String,TemperatureProfile>();
 		
 		JSONObject json = this.g_comm.executeQuery(this.createRequest());
 		
-		if(json != null)
+		if(json != null && json.containsKey("temperature"));
 		{
+			//get the whole tree
 			JSONArray profiles = (JSONArray)((JSONObject)json.get("temperature")).get("profiles");
 			
 			if(profiles != null && profiles.size() > 0)
@@ -38,11 +52,9 @@ public class SettingsCommand extends OctoPrintCommand {
 				TemperatureProfile tProfile = null;
 				for(int count = 0; count < profiles.size(); count ++)
 				{
-					tProfile = new TemperatureProfile();
-					
-					tProfile.loadJSON((JSONObject)profiles.get(count));
-					
-					result.add(tProfile);
+					tProfile = JSONUtils.createObject((JSONObject)profiles.get(count), TemperatureProfile.class.getName());
+
+					result.put(tProfile.getName(),tProfile);
 				}
 			}
 		}

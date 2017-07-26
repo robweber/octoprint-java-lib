@@ -1,0 +1,312 @@
+{
+  "terminalFilters": [
+    {
+      "regex": "(Send: (N\\d+\\s+)?M105)|(Recv: ok (B|T\\d*):)",
+      "name": "Suppress temperature messages"
+    },
+    {
+      "regex": "(Send: (N\\d+\\s+)?M27)|(Recv: SD printing byte)",
+      "name": "Suppress SD status messages"
+    },
+    {
+      "regex": "Recv: wait",
+      "name": "Suppress wait responses"
+    }
+  ],
+  "appearance": {
+    "colorTransparent": false,
+    "color": "default",
+    "showFahrenheitAlso": false,
+    "name": "",
+    "defaultLanguage": "_default"
+  },
+  "plugins": {
+    "pushover": {
+      "user_key": "",
+      "token": "",
+      "sound": "echo",
+      "events": {
+        "PrintPaused": {
+          "message": "Print job paused {m70_cmd}",
+          "help": "Send a notification when a Pause event is received. When a <code>m70<\/code> was sent to the printer, the message will be appended to the notification.",
+          "priority": "",
+          "name": "Print paused"
+        },
+        "Waiting": {
+          "message": "Printer is waiting {m70_cmd}",
+          "help": "Send a notification when a Waiting event is received. When a <code>m70<\/code> was sent to the printer, the message will be appended to the notification.",
+          "priority": "",
+          "name": "Printer is waiting"
+        },
+        "PrintDone": {
+          "message": "Print job finished: {file}, finished printing in {elapsed_time}",
+          "priority": "0",
+          "name": "Print done"
+        },
+        "PrintFailed": {
+          "message": "Print job failed: {file}",
+          "priority": "",
+          "name": "Print failed"
+        }
+      }
+    },
+    "pluginmanager": {
+      "repository": "http:\/\/plugins.octoprint.org\/plugins.json",
+      "pip_args": null,
+      "hidden": [
+        
+      ],
+      "pip_force_user": false,
+      "dependency_links": false,
+      "repository_ttl": 1440
+    },
+    "navbartemp": {
+      "displayRaspiTemp": false
+    },
+    "announcements": {
+      "display_limit": 3,
+      "forced_channels": [
+        "_important"
+      ],
+      "enabled_channels": [
+        
+      ],
+      "channels": {
+        "_spotlight": {
+          "priority": 2,
+          "name": "OctoPrint Community Spotlights",
+          "type": "rss",
+          "url": "http:\/\/octoprint.org\/feeds\/spotlight.xml"
+        },
+        "_important": {
+          "read_until": 1478614200,
+          "priority": 1,
+          "name": "Important OctoPrint Announcements",
+          "type": "rss",
+          "url": "http:\/\/octoprint.org\/feeds\/important.xml"
+        },
+        "_plugins": {
+          "priority": 2,
+          "name": "New Plugins in the Repository",
+          "type": "rss",
+          "url": "http:\/\/plugins.octoprint.org\/feed.xml"
+        },
+        "_news": {
+          "priority": 2,
+          "name": "OctoPrint News",
+          "type": "rss",
+          "url": "http:\/\/octoprint.org\/feeds\/news.xml"
+        },
+        "_releases": {
+          "priority": 2,
+          "name": "OctoPrint Release Announcements",
+          "type": "rss",
+          "url": "http:\/\/octoprint.org\/feeds\/releases.xml"
+        },
+        "_octopi": {
+          "priority": 2,
+          "name": "OctoPi Announcements",
+          "type": "rss",
+          "url": "http:\/\/octoprint.org\/feeds\/octopi.xml"
+        }
+      },
+      "ttl": 360,
+      "summary_limit": 300
+    },
+    "softwareupdate": {
+      "octoprint_method": "update_script",
+      "octoprint_release_channel": "master",
+      "cache_ttl": 1440,
+      "pip_command": null,
+      "octoprint_checkout_folder": "\/home\/pi\/OctoPrint",
+      "octoprint_type": "github_release",
+      "octoprint_branch_mappings": [
+        {
+          "name": "Stable",
+          "branch": "master"
+        },
+        {
+          "name": "Maintenance RCs",
+          "branch": "rc\/maintenance"
+        },
+        {
+          "name": "Devel RCs",
+          "branch": "rc\/devel"
+        }
+      ]
+    },
+    "cura": {
+      "debug_logging": false,
+      "cura_engine": "\/usr\/local\/bin\/cura_engine",
+      "default_profile": null
+    },
+    "printhistory": {
+      "spool_inventory": [
+        
+      ]
+    },
+    "discovery": {
+      "model": {
+        "vendorUrl": null,
+        "vendor": null,
+        "description": null,
+        "name": null,
+        "number": null,
+        "serial": null,
+        "url": null
+      },
+      "httpUsername": null,
+      "pathPrefix": null,
+      "publicPort": 80,
+      "zeroConf": [
+        
+      ],
+      "httpPassword": null,
+      "publicHost": null,
+      "upnpUuid": "fa17175b-e498-4716-9a1a-b7d6b5007b70"
+    }
+  },
+  "printer": {
+    "defaultExtrusionLength": 5
+  },
+  "temperature": {
+    "profiles": [
+      {
+        "bed": 100,
+        "name": "ABS",
+        "extruder": 210
+      },
+      {
+        "bed": 60,
+        "name": "PLA",
+        "extruder": "204"
+      },
+      {
+        "bed": "110",
+        "name": "HIPS",
+        "extruder": "210"
+      }
+    ],
+    "cutoff": 30
+  },
+  "folder": {
+    "logs": "\/home\/pi\/.octoprint\/logs",
+    "timelapse": "\/home\/pi\/.octoprint\/timelapse",
+    "timelapseTmp": "\/home\/pi\/.octoprint\/timelapse\/tmp",
+    "uploads": "\/home\/pi\/.octoprint\/uploads",
+    "watched": "\/home\/pi\/.octoprint\/watched"
+  },
+  "scripts": {
+    "gcode": {
+      "snippets\/disable_bed": "{% if printer_profile.heatedBed %}M140 S0\n{% endif %}",
+      "snippets\/disable_hotends": "{% for tool in range(printer_profile.extruder.count) %}M104 T{{ tool }} S0\n{% endfor %}",
+      "afterPrintCancelled": "; disable motors\nM84\n\n;disable all heaters\n{% snippet 'disable_hotends' %}\n{% snippet 'disable_bed' %}\n;disable fan\nM106 S0"
+    }
+  },
+  "webcam": {
+    "watermark": true,
+    "flipH": false,
+    "rotate90": false,
+    "snapshotUrl": "http:\/\/127.0.0.1:8080\/?action=snapshot",
+    "flipV": false,
+    "bitrate": "5000k",
+    "streamUrl": "\/webcam\/?action=stream",
+    "ffmpegThreads": 1,
+    "ffmpegPath": "\/usr\/bin\/avconv"
+  },
+  "system": {
+    "events": null,
+    "actions": [
+      
+    ]
+  },
+  "api": {
+    "enabled": true,
+    "allowCrossOrigin": true,
+    "key": "TEST"
+  },
+  "feature": {
+    "modelSizeDetection": true,
+    "sdAlwaysAvailable": false,
+    "blockWhileDwelling": false,
+    "sizeThreshold": 20971520,
+    "sdSupport": true,
+    "neverSendChecksum": false,
+    "swallowOkAfterResend": true,
+    "gcodeViewer": true,
+    "externalHeatupDetection": true,
+    "firmwareDetection": true,
+    "pollWatched": false,
+    "ignoreIdenticalResends": false,
+    "printCancelConfirmation": true,
+    "temperatureGraph": true,
+    "alwaysSendChecksum": false,
+    "waitForStart": false,
+    "keyboardControl": true,
+    "mobileSizeThreshold": 2097152,
+    "sdRelativePath": false,
+    "repetierTargetTemp": false
+  },
+  "server": {
+    "commands": {
+      "systemShutdownCommand": "sudo shutdown -h now",
+      "serverRestartCommand": "sudo service octoprint restart",
+      "systemRestartCommand": "sudo shutdown -r now"
+    },
+    "diskspace": {
+      "critical": 209715200,
+      "warning": 524288000
+    }
+  },
+  "serial": {
+    "port": null,
+    "timeoutSdStatus": 1.0,
+    "timeoutCommunication": 30.0,
+    "maxTimeoutsPrinting": 5,
+    "additionalPorts": [
+      
+    ],
+    "checksumRequiringCommands": [
+      "M110"
+    ],
+    "additionalBaudrates": [
+      
+    ],
+    "helloCommand": "M110 N0",
+    "longRunningCommands": [
+      "G4",
+      "G28",
+      "G29",
+      "G30",
+      "G32",
+      "M400",
+      "M226",
+      "M600"
+    ],
+    "timeoutTemperature": 5.0,
+    "autoconnect": false,
+    "log": false,
+    "timeoutDetection": 0.5,
+    "disconnectOnErrors": true,
+    "maxTimeoutsLong": 5,
+    "triggerOkForM29": true,
+    "timeoutConnection": 10.0,
+    "baudrateOptions": [
+      250000,
+      230400,
+      115200,
+      57600,
+      38400,
+      19200,
+      9600
+    ],
+    "maxTimeoutsIdle": 2,
+    "ignoreErrorsFromFirmware": false,
+    "timeoutTemperatureTargetSet": 2.0,
+    "supportResendsWithoutOk": false,
+    "portOptions": [
+      "\/dev\/ttyACM0"
+    ],
+    "baudrate": null
+  }
+}
