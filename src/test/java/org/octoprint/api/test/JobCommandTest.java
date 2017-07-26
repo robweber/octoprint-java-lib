@@ -47,8 +47,17 @@ public class JobCommandTest {
 	
 	@Test
 	public void percentCompleteTest(){
+		
+		//check a job at 23%
 		JobProgress p = command.getJobDetails().getJobProgress();
-		assertEquals("Percent Complete",.23,p.percentComplete(),1);
+		assertEquals("Partial Complete",.23,p.percentComplete(),1);
+		
+		//check a job at 100%
+		OctoPrintInstance i2 = Mockito.mock(OctoPrintInstance.class,new JSONAnswer("100_job.json"));
+		command = new JobCommand(i2);
+		
+		p = command.getJobDetails().getJobProgress();
+		assertEquals("100 Percent Complete",1,p.percentComplete(),1);
 	}
 	
 	@Test
