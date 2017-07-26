@@ -53,19 +53,18 @@ public class JobCommand extends OctoPrintCommand {
 	 * Simple enum to signal the current state of a job
 	 */
 	public enum JobState{
-		START("start"),
-		RESTART("restart"),
-		PAUSE("pause"),
-		CANCEL("cancel");
-		
-		private String m_state = null;
-		
-		JobState(String state){
-			m_state = state;
-		}
+		START,
+		RESTART,
+		PAUSE,
+		CANCEL;
 		
 		public String getState(){
-			return m_state;
+			return this.name().toLowerCase();
+		}
+		
+		@Override
+		public String toString(){
+			return this.getState();
 		}
 	}
 }
