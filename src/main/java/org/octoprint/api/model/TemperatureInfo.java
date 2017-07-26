@@ -17,6 +17,9 @@ public class TemperatureInfo implements JSONAware, JSONLoader{
 		m_name = "Printer Device";
 	}
 
+	/**
+	 * @return the name of tool (Extruder, Print Bed, etc)
+	 */
 	public String getName(){
 		return m_name;
 	}
@@ -25,23 +28,32 @@ public class TemperatureInfo implements JSONAware, JSONLoader{
 		m_name = n;
 	}
 	
-	public double getActualTemp(){
-		return (Double)m_data.get("actual");
+	/**
+	 * @return the actual Temp of the tool
+	 */
+	public Double getActualTemp(){
+		return Double.parseDouble(m_data.get("actual").toString());
 	}
 	
-	public double getTargetTemp(){
-		double result = -1; 	//-1 if no target is set
+	/**
+	 * @return the target temp, returns -1 if no target is set
+	 */
+	public Double getTargetTemp(){
+		Double result = new Double(-1);	//-1 if no target is set
 		
 		if(m_data.get("target") != null)
 		{
-			result = (Double)m_data.get("target");
+			result = Double.parseDouble(m_data.get("target").toString());
 		}
 		
 		return result;
 	}
 	
-	public long getOffset(){
-		return (Long)m_data.get("offset");
+	/**
+	 * @return the offset, 0 if none
+	 */
+	public Long getOffset(){
+		return Long.parseLong(m_data.get("offset").toString());
 	}
 	
 	@Override
