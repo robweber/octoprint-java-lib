@@ -5,6 +5,8 @@
   <version>0.0.2</version>
   <name>OctoPrint Java Lib</name>
   <description>Provides Communication with OctoPrint via the REST API in Java</description>
+  <url>https://github.com/robweber/octoprint-java-lib/tree/master</url>
+  
   <developers>
       <developer>
           <id>robweber</id>
@@ -15,8 +17,8 @@
           </roles>
       </developer>
   </developers>
+  
   <build>
-    <sourceDirectory>src</sourceDirectory>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -26,8 +28,29 @@
           <target>1.7</target>
         </configuration>
       </plugin>
+      <plugin>
+      	<groupId>org.apache.maven.plugins</groupId>
+      	<artifactId>maven-javadoc-plugin</artifactId>
+      	<version>3.0.0-M1</version>
+      	<configuration>
+      		<excludePackageNames>com.octoprint.api.test.*</excludePackageNames>
+      		<outputDirectory>${project.basedir}/docs</outputDirectory>
+      		<links>
+      			<link>http://juliusdavies.ca/json-simple-1.1.1-javadocs/</link>
+      		</links>
+      	</configuration>
+      	<executions>
+      		<execution>
+      			<id>generate-javadocs</id>
+      			<goals>
+      				<goal>jar</goal>
+      			</goals>
+      		</execution>
+      	</executions>
+      </plugin>
     </plugins>
   </build>
+  
   <dependencies>
   	<dependency>
   		<groupId>com.googlecode.json-simple</groupId>
@@ -49,5 +72,5 @@
   		<scope>test</scope>
   	</dependency>
   </dependencies>
-  <url>https://github.com/robweber/octoprint-java-lib/tree/master</url>
+  
 </project>
