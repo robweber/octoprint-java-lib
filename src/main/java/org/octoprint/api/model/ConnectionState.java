@@ -25,14 +25,14 @@ public class ConnectionState implements JSONAware, JSONLoader {
 	}
 	
 	/**
-	 * @return connected baudrate
+	 * @return connected baudrate, null if nothing available
 	 */
-	public int getBaudrate(){
-		int result = 0;
+	public Long getBaudrate(){
+		Long result = null;
 		
 		if(m_json.get("baudrate") != null)
 		{
-			result = Integer.parseInt(m_json.get("baudrate").toString());
+			result = Long.parseLong(m_json.get("baudrate").toString());
 		}
 		
 		return result;
