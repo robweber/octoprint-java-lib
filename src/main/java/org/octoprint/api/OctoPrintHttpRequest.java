@@ -35,6 +35,7 @@ public class OctoPrintHttpRequest {
 		m_type = type;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void addParam(String name, Object value){
 		m_params.put(name,value);
 	}

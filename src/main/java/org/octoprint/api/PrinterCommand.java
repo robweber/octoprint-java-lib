@@ -92,6 +92,7 @@ public class PrinterCommand extends OctoPrintCommand {
 	 * @param value the value of the command (temperature, amount to extrude, etc)
 	 * @return if this operation succeeded
 	 */
+	@SuppressWarnings("unchecked")
 	public boolean sendExtruderCommand(ToolCommand command, int extruder, int value){
 		boolean result = true;
 		JSONObject params = null;
@@ -144,6 +145,7 @@ public class PrinterCommand extends OctoPrintCommand {
 	 * @param value the value of the command(temp, offset)
 	 * @return if this operation succeeded
 	 */
+	@SuppressWarnings("unchecked")
 	public boolean sendBedCommand(ToolCommand command, int value){
 		boolean result = false;
 		
@@ -174,6 +176,7 @@ public class PrinterCommand extends OctoPrintCommand {
 	 * 
 	 * @return if this command succeeded
 	 */
+	@SuppressWarnings("unchecked")
 	public boolean moveHome(){
 		OctoPrintHttpRequest request = this.createRequest("printhead");
 		

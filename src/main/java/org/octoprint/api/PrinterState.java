@@ -53,6 +53,7 @@ public class PrinterState implements JSONAware, JSONLoader {
 		m_text = json.get("text").toString();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public String toJSONString() {
 		JSONObject result = new JSONObject();
