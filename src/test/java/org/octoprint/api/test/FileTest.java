@@ -27,7 +27,7 @@ public class FileTest {
 	}
 	
 	@Test
-	public void FileInfoTest(){
+	public void fileInfoTest(){
 		OctoPrintFileInformation aFile = command.getFileInfo("whistle_v2.gcode");
 		
 		//convert this to a file
@@ -39,7 +39,7 @@ public class FileTest {
 	}
 	
 	@Test
-	public void GcodeAnalysisTest(){
+	public void gcodeAnalysisTest(){
 		OctoPrintFileInformation aFile = command.getFileInfo("whistle_v2.gcode");
 		
 		//convert this to a file

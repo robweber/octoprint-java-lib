@@ -6,7 +6,6 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.octoprint.api.FileCommand;
 import org.octoprint.api.FileType;
-import org.octoprint.api.OctoPrintFile;
 import org.octoprint.api.OctoPrintFileInformation;
 import org.octoprint.api.OctoPrintInstance;
 import org.octoprint.api.test.util.JSONAnswer;
@@ -33,14 +32,14 @@ public class FileInformationTest {
 	}
 	
 	@Test
-	public void IsFileSuccessTest(){
+	public void isFileSuccessTest(){
 		OctoPrintFileInformation aFile = command.getFileInfo("whistle_v2.gcode");
 		
 		assertEquals("Is File",aFile.getType(),FileType.MACHINECODE);
 	}
 	
 	@Test
-	public void IsFolderSuccessTest(){
+	public void isFolderSuccessTest(){
 		//need a folder for this one
 		OctoPrintInstance i = Mockito.mock(OctoPrintInstance.class,new JSONAnswer("single_folder.json"));
 		
@@ -52,7 +51,7 @@ public class FileInformationTest {
 	}
 	
 	@Test
-	public void IsFileMissingTest(){
+	public void isFileMissingTest(){
 		//we don't have the file in this instance
 		OctoPrintInstance i = Mockito.mock(OctoPrintInstance.class,new NullAnswer());
 		
@@ -64,7 +63,7 @@ public class FileInformationTest {
 	}
 	
 	@Test
-	public void FileInformationTest(){
+	public void fileInformationTest(){
 		OctoPrintFileInformation aFile = command.getFileInfo("whistle_v2.gcode");
 		
 		assertEquals("Filename ","whistle_v2.gcode",aFile.getName());

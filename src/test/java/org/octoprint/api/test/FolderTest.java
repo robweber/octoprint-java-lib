@@ -28,7 +28,7 @@ public class FolderTest {
 	}
 	
 	@Test
-	public void FolderInfoTest(){
+	public void folderInfoTest(){
 		OctoPrintFileInformation aFolder = command.getFileInfo("folderA");
 		
 		//convert this to a folder
@@ -38,7 +38,7 @@ public class FolderTest {
 	}
 
 	@Test
-	public void ChildrenTest(){
+	public void childrenTest(){
 		OctoPrintFileInformation aFolder = command.getFileInfo("folderA");
 		
 		//convert this to a folder
