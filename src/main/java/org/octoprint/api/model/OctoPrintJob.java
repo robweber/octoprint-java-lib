@@ -43,7 +43,7 @@ public class OctoPrintJob implements JSONAware, JSONLoader {
 	 * @return the estimated print time for the file, in seconds
 	 */
 	public Long getEstimatedPrintTime(){
-		return ((Long)m_job.get("estimatedPrintTime"));
+		return new Long(m_job.get("estimatedPrintTime").toString());
 	}
 	
 	/**
@@ -77,15 +77,15 @@ public class OctoPrintJob implements JSONAware, JSONLoader {
 		}
 		
 		public Double percentComplete(){
-			return Double.parseDouble(m_json.get("completion").toString());
+			return new Double(m_json.get("completion").toString());
 		}
 		
 		public Long elapsedTime(){
-			return Long.parseLong(m_json.get("printTime").toString());
+			return new Long(m_json.get("printTime").toString());
 		}
 		
 		public Long timeRemaining(){
-			return Long.parseLong(m_json.get("printTimeLeft").toString());
+			return new Long(m_json.get("printTimeLeft").toString());
 		}
 		
 		@Override

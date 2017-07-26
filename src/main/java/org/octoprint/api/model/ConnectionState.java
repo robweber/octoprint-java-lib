@@ -32,7 +32,7 @@ public class ConnectionState implements JSONAware, JSONLoader {
 		
 		if(m_json.get("baudrate") != null)
 		{
-			result = Long.parseLong(m_json.get("baudrate").toString());
+			result = new Long(m_json.get("baudrate").toString());
 		}
 		
 		return result;

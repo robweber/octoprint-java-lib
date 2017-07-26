@@ -21,14 +21,14 @@ public class OctoPrintFile extends OctoPrintFileInformation {
 	 * @return the size in bytes
 	 */
 	public Long getSize(){
-		return (Long)m_data.get("size");
+		return new Long(m_data.get("size").toString());
 	}
 	
 	/**
 	 * @return the timestamp of when this file was uploaded return in milliseconds
 	 */
 	public Long getTimestamp(){
-		Long unix = (Long)m_data.get("date");
+		Long unix = new Long(m_data.get("date").toString());
 		
 		//convert to milliseconds
 		return new Long(unix.longValue() * 1000);
@@ -44,7 +44,7 @@ public class OctoPrintFile extends OctoPrintFileInformation {
 		
 		if(gcode != null)
 		{
-			result = (Long)gcode.get("estimatedPrintTime");
+			result = new Long(gcode.get("estimatedPrintTime").toString());
 		}
 		
 		return result;

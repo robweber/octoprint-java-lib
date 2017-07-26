@@ -32,7 +32,7 @@ public class TemperatureInfo implements JSONAware, JSONLoader{
 	 * @return the actual Temp of the tool
 	 */
 	public Double getActualTemp(){
-		return Double.parseDouble(m_data.get("actual").toString());
+		return new Double(m_data.get("actual").toString());
 	}
 	
 	/**
@@ -43,7 +43,7 @@ public class TemperatureInfo implements JSONAware, JSONLoader{
 		
 		if(m_data.get("target") != null)
 		{
-			result = Double.parseDouble(m_data.get("target").toString());
+			result = new Double(m_data.get("target").toString());
 		}
 		
 		return result;
@@ -53,7 +53,7 @@ public class TemperatureInfo implements JSONAware, JSONLoader{
 	 * @return the offset, 0 if none
 	 */
 	public Long getOffset(){
-		return Long.parseLong(m_data.get("offset").toString());
+		return new Long(m_data.get("offset").toString());
 	}
 	
 	@Override
