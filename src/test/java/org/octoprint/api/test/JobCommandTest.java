@@ -2,15 +2,22 @@ package org.octoprint.api.test;
 
 import static org.junit.Assert.*;
 
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.octoprint.api.JobCommand;
 import org.octoprint.api.OctoPrintInstance;
-import org.octoprint.api.OctoPrintJob;
 import org.octoprint.api.OctoPrintJob.JobProgress;
 import org.octoprint.api.test.util.JSONAnswer;
 
+/**
+ * 
+ * Test aspects of the JobCommand class
+ * 
+ * @author rweber
+ *
+ */
 public class JobCommandTest {
 	private JobCommand command = null;
 	
@@ -27,28 +34,31 @@ public class JobCommandTest {
 	}
 	
 	@Test
-	public void getNameTest(){
+	public void nameTest(){
 		
 		assertEquals("Job Name Correct",command.getJobDetails().getName(),"whistle_v2.gcode");
 	}
 	
 	@Test
-	public void getEstimatedTimeTest(){
+	public void estimatedTimeTest(){
 		
-		assertEquals("Estimated Time Remaining",8811,(long)command.getJobDetails().getEstimatedPrintTime().longValue());
+		assertEquals("Estimated Time Remaining",(long)8811,command.getJobDetails().getEstimatedPrintTime().longValue());
 	}
 	
-	public void getPercentCompleteTest(){
+	@Test
+	public void percentCompleteTest(){
 		JobProgress p = command.getJobDetails().getJobProgress();
 		assertEquals("Percent Complete",.23,p.percentComplete(),1);
 	}
 	
-	public void getElaspedTimeTest(){
+	@Test
+	public void elaspedTimeTest(){
 		JobProgress p = command.getJobDetails().getJobProgress();
 		assertEquals("Elapsed Time",(long)276,p.elapsedTime().longValue());
 	}
 	
-	public void getTimeRemainingTest(){
+	@Test
+	public void timeRemainingTest(){
 		JobProgress p = command.getJobDetails().getJobProgress();
 		assertEquals("Time Remaining",(long)912,p.timeRemaining().longValue());
 	}
