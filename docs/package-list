@@ -1,2 +1,3 @@
 org.octoprint.api
+org.octoprint.api.model
 org.octoprint.api.util
