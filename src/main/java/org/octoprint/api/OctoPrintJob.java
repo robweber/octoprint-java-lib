@@ -76,7 +76,7 @@ public class OctoPrintJob implements JSONAware, JSONLoader {
 		}
 		
 		public Double percentComplete(){
-			return (Double)m_json.get("completion");
+			return Double.parseDouble(m_json.get("completion").toString());
 		}
 		
 		public Long elapsedTime(){
