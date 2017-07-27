@@ -52,6 +52,12 @@ public class OctoPrintJob implements JSONAware, JSONLoader {
 		return m_progress;
 	}
 
+	/**
+	 * Returns information about the expected filament consumption regarding the current print job. Can be {@code null} if {@param toolIndex} is out of range or if details couldn't be retrieved.
+	 *
+	 * @param toolIndex Number of the tool to get
+	 * @return filament consumption details
+	 */
 	public FilamentDetails getFilamentDetails(final int toolIndex) {
 		JSONObject m_filament = (JSONObject) m_job.get("filament");
 		if(m_filament == null) {
@@ -112,29 +118,54 @@ public class OctoPrintJob implements JSONAware, JSONLoader {
 
 	}
 
-	public class FilamentDetails implements JSONAware, JSONLoader {
+	/**
+	 * Provides information about filament usage.
+	 */
+	public static final class FilamentDetails implements JSONAware, JSONLoader {
 		private JSONObject m_json = null;
 
-		public FilamentDetails(){
+		private FilamentDetails(){
 
 		}
 
+		/**
+		 * Returns the length of filament. {@code null} if length is not provided.
+		 *
+		 * @return length in mm
+		 */
 		public Long length(){
-			return new Long(m_json.get("length").toString());
+			if(this.m_json == null || !this.m_json.containsKey("length")) {
+				return null;
+			}
+			return new Long(this.m_json.get("length").toString());
 		}
 
+		/**
+		 * Returns the volume of filament. {@code null} if volume is not provided.
+		 *
+		 * @return volume in cm³
+		 */
 		public Double volume(){
-			return new Double(m_json.get("volume").toString());
+			if(this.m_json == null || !this.m_json.containsKey("volume")) {
+				return null;
+			}
+			return new Double(this.m_json.get("volume").toString());
 		}
 
+		/**
+		 * {@inheritDoc}
+		 */
 		@Override
-		public void loadJSON(JSONObject json) {
+		public void loadJSON(final JSONObject json) {
 			m_json = json;
 		}
 
+		/**
+		 * {@inheritDoc}
+		 */
 		@Override
 		public String toJSONString() {
-			return m_json.toJSONString();
+			return this.m_json.toJSONString();
 		}
 
 	}
