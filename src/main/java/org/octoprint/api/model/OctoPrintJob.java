@@ -53,13 +53,16 @@ public class OctoPrintJob implements JSONAware, JSONLoader {
 	}
 
 	/**
-	 * Returns information about the expected filament consumption regarding the current print job. Can be {@code null} if {@param toolIndex} is out of range or if details couldn't be retrieved.
+	 * Returns information about the expected filament consumption regarding the current print job. Can be {@code null} if {@code toolIndex} is out of range or if details couldn't be retrieved.
 	 *
-	 * @param toolIndex Number of the tool to get
+	 * @param toolIndex Number of the tool to get details about
 	 * @return filament consumption details
 	 */
 	public FilamentDetails getFilamentDetails(final int toolIndex) {
-		JSONObject m_filament = (JSONObject) m_job.get("filament");
+		if(this.m_job == null) {
+			return null;
+		}
+		JSONObject m_filament = (JSONObject) this.m_job.get("filament");
 		if(m_filament == null) {
 			return null;
 		}
