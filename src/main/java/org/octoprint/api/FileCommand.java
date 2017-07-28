@@ -55,7 +55,7 @@ public class FileCommand extends OctoPrintCommand {
 		{
 			result = new ArrayList<OctoPrintFileInformation>();
 			
-			JsonArray children = (JsonArray)json.get("files");
+			JsonArray children = (JsonArray)json.getCollection("files");
 			
 			for(int count = 0; count < children.size(); count ++)
 			{

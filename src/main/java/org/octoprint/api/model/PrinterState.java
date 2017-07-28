@@ -22,27 +22,27 @@ public final class PrinterState implements Jsonable, JSONLoader {
 	}
 
 	public boolean isOperational(){
-		return (Boolean)m_json.get("operational");
+		return m_json.getBoolean("operational");
 	}
 	
 	public boolean isConnected(){
-		return !(Boolean)m_json.get("closedOrError");
+		return !m_json.getBoolean("closedOrError");
 	}
 	
 	public boolean isReady(){
-		return (Boolean)m_json.get("ready");
+		return m_json.getBoolean("ready");
 	}
 	
 	public boolean isPrinting(){
-		return (Boolean)m_json.get("printing");
+		return m_json.getBoolean("printing");
 	}
 	
 	public boolean isPaused(){
-		return (Boolean)m_json.get("paused");
+		return m_json.getBoolean("paused");
 	}
 	
 	public boolean hasError(){
-		return (Boolean)m_json.get("error");
+		return m_json.getBoolean("error");
 	}
 	
 	@Override
@@ -53,7 +53,7 @@ public final class PrinterState implements Jsonable, JSONLoader {
 	@Override
 	public void loadJSON(JsonObject json) {
 		m_json = (JsonObject)json.get("flags");
-		m_text = json.get("text").toString();
+		m_text = json.getString("text");
 	}
 
 	@Override

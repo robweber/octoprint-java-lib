@@ -43,7 +43,7 @@ public class SettingsCommand extends OctoPrintCommand {
 		if(json != null && json.containsKey("temperature"));
 		{
 			//get the whole tree
-			JsonArray profiles = (JsonArray)((JsonObject)json.get("temperature")).get("profiles");
+			JsonArray profiles = (JsonArray)((JsonObject)json.get("temperature")).getCollection("profiles");
 			
 			if(profiles != null && profiles.size() > 0)
 			{

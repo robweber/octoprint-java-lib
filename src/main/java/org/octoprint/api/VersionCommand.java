@@ -24,7 +24,7 @@ public class VersionCommand extends OctoPrintCommand{
 		
 		if(json != null)
 		{
-			result = json.get("api").toString();
+			result = json.getString("api");
 		}
 		
 		return result;
@@ -40,7 +40,7 @@ public class VersionCommand extends OctoPrintCommand{
 		
 		if(json != null)
 		{
-			result = json.get("server").toString();
+			result = json.getString("server");
 		}
 		
 		return result;

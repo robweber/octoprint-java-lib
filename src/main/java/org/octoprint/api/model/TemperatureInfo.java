@@ -36,28 +36,21 @@ public final class TemperatureInfo implements Jsonable, JSONLoader{
 	 * @return the actual Temp of the tool in degrees celsius
 	 */
 	public Double getActualTemp(){
-		return new Double(m_data.get("actual").toString());
+		return m_data.getDouble("actual");
 	}
 	
 	/**
 	 * @return the target temp in degrees celsius, returns -1 if no target is set
 	 */
 	public Double getTargetTemp(){
-		Double result = new Double(-1);	//-1 if no target is set
-		
-		if(m_data.get("target") != null)
-		{
-			result = new Double(m_data.get("target").toString());
-		}
-		
-		return result;
+		return m_data.getDoubleOrDefault("target", -1);
 	}
 	
 	/**
 	 * @return the offset, 0 if none
 	 */
 	public Long getOffset(){
-		return new Long(m_data.get("offset").toString());
+		return m_data.getLong("offset");
 	}
 	
 	@Override

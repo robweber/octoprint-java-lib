@@ -33,7 +33,7 @@ public final class OctoPrintJob implements Jsonable, JSONLoader {
 
 			if(file.get("name") != null)
 			{
-				result = file.get("name").toString();
+				result = file.getString("name");
 			}
 
 		}
@@ -45,7 +45,7 @@ public final class OctoPrintJob implements Jsonable, JSONLoader {
 	 * @return the estimated print time for the file, in seconds
 	 */
 	public Long getEstimatedPrintTime(){
-		return new Long(m_job.get("estimatedPrintTime").toString());
+		return m_job.getLong("estimatedPrintTime");
 	}
 
 	/**
@@ -107,28 +107,28 @@ public final class OctoPrintJob implements Jsonable, JSONLoader {
 		private JsonObject m_json = null;
 
 		private JobProgress(){
-
+			m_json = new JsonObject();
 		}
 
 		/**
 		 * @return the percentage the job is complete as a decimal, .05 = 5% 1 = 100%
 		 */
 		public Double percentComplete(){
-			return new Double(m_json.get("completion").toString());
+			return m_json.getDouble("completion");
 		}
 
 		/**
 		 * @return elapsed time since the job was started, in seconds
 		 */
 		public Long elapsedTime(){
-			return new Long(m_json.get("printTime").toString());
+			return m_json.getLong("printTime");
 		}
 
 		/**
 		 * @return estimated time remaining on the print, in seconds
 		 */
 		public Long timeRemaining(){
-			return new Long(m_json.get("printTimeLeft").toString());
+			return m_json.getLong("printTimeLeft");
 		}
 
 		@Override
@@ -155,7 +155,7 @@ public final class OctoPrintJob implements Jsonable, JSONLoader {
 		private JsonObject m_json = null;
 
 		private FilamentDetails(){
-
+			m_json = new JsonObject();
 		}
 
 		/**
@@ -164,10 +164,11 @@ public final class OctoPrintJob implements Jsonable, JSONLoader {
 		 * @return length in mm
 		 */
 		public Long length(){
-			if(this.m_json == null || !this.m_json.containsKey("length")) {
+			if(!this.m_json.containsKey("length")) 
+			{
 				return null;
 			}
-			return new Long(this.m_json.get("length").toString());
+			return this.m_json.getLong("length");
 		}
 
 		/**
@@ -176,10 +177,12 @@ public final class OctoPrintJob implements Jsonable, JSONLoader {
 		 * @return volume in cm³
 		 */
 		public Double volume(){
-			if(this.m_json == null || !this.m_json.containsKey("volume")) {
+			if(!this.m_json.containsKey("volume")) 
+			{
 				return null;
 			}
-			return new Double(this.m_json.get("volume").toString());
+			
+			return this.m_json.getDouble("volume");
 		}
 
 		/**

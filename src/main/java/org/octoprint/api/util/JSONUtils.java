@@ -19,6 +19,7 @@ import org.json.simple.Jsoner;
  */
 public class JSONUtils {
 
+	@SuppressWarnings("unchecked")
 	public static <V> Map<String,V> loadMap(JsonObject jMap, Class<V> value) throws DeserializationException{
 		Map<String,V> result = new HashMap<String,V>();
 		
@@ -42,6 +43,7 @@ public class JSONUtils {
 		return result;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public static <T> List<T> loadList(JsonArray jArray, Class<T> type) throws DeserializationException{
 		List<T> result = new ArrayList<T>();
 		

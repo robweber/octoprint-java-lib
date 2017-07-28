@@ -34,7 +34,7 @@ public final class ConnectionState implements Jsonable, JSONLoader {
 		
 		if(m_json.get("baudrate") != null)
 		{
-			result = new Long(m_json.get("baudrate").toString());
+			result = m_json.getLong("baudrate");
 		}
 		
 		return result;
@@ -44,21 +44,21 @@ public final class ConnectionState implements Jsonable, JSONLoader {
 	 * @return port as a string (most likely in the /dev/tty0 format)
 	 */
 	public String getPort(){
-		if(m_json.get("port") != null)
+		String result = null;
+		
+		if(m_json.containsKey("port"))
 		{
-			return m_json.get("port").toString();
+			result = m_json.getString("port");
 		}
-		else
-		{
-			return null;
-		}
+		
+		return result;
 	}
 	
 	/**
 	 * @return name of connection profile
 	 */
 	public String getPrinterProfile(){
-		return m_json.get("printerProfile").toString();
+		return m_json.getString("printerProfile");
 	}
 	
 	@Override
@@ -75,5 +75,4 @@ public final class ConnectionState implements Jsonable, JSONLoader {
 	public void toJson(Writer arg0) throws IOException {
 		arg0.write(this.toJson());
 	}
-
 }

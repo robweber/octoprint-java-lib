@@ -25,7 +25,7 @@ public final class OctoPrintFolder extends OctoPrintFileInformation {
 	private void buildChildren(){
 		m_children = new ArrayList<OctoPrintFileInformation>();
 		
-		JsonArray children = (JsonArray)m_data.get("children");
+		JsonArray children = (JsonArray)m_data.getCollection("children");
 		JsonObject aChild = null;
 		FileType t = null;
 		
@@ -34,7 +34,7 @@ public final class OctoPrintFolder extends OctoPrintFileInformation {
 			aChild = (JsonObject)children.get(count);
 			
 			//get the type of child
-			t = FileType.findType(aChild.get("type").toString());
+			t = FileType.findType(aChild.getString("type"));
 			
 			if(t == FileType.FOLDER)
 			{
@@ -104,6 +104,6 @@ public final class OctoPrintFolder extends OctoPrintFileInformation {
 	 * @return the size, in bytes, of the entire folder
 	 */
 	public Long getSize(){
-		return new Long(m_data.get("size").toString());
+		return m_data.getLong("size");
 	}
 }

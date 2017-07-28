@@ -28,14 +28,14 @@ public final class TemperatureProfile implements Jsonable, JSONLoader {
 	 * @return the bed temp of this profile, in degrees celsius
 	 */
 	public Long getBedTemp(){
-		return new Long(m_json.get("bed").toString());
+		return m_json.getLong("bed");
 	}
 	
 	/**
 	 * @return the extruder temp of this profile, in degrees celsius
 	 */
 	public Long getExtruderTemp(){
-		return new Long(m_json.get("extruder").toString());
+		return m_json.getLong("extruder");
 	}
 	
 	@Override 

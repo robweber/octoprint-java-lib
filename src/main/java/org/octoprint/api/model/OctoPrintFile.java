@@ -14,24 +14,21 @@ public final class OctoPrintFile extends OctoPrintFileInformation {
 	}
 
 	public String getHash(){
-		return m_data.get("hash").toString();
+		return m_data.getString("hash");
 	}
 	
 	/**
 	 * @return the size in bytes
 	 */
 	public Long getSize(){
-		return new Long(m_data.get("size").toString());
+		return m_data.getLong("size");
 	}
 	
 	/**
 	 * @return the timestamp of when this file was uploaded, seconds
 	 */
 	public Long getTimestamp(){
-		Long unix = new Long(m_data.get("date").toString());
-		
-		//convert to milliseconds
-		return new Long(unix.longValue());
+		return m_data.getLong("date");
 	}
 	
 	/**
@@ -44,7 +41,7 @@ public final class OctoPrintFile extends OctoPrintFileInformation {
 		
 		if(gcode != null)
 		{
-			result = new Long(gcode.get("estimatedPrintTime").toString());
+			result = gcode.getLong("estimatedPrintTime");
 		}
 		
 		return result;

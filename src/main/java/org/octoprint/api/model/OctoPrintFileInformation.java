@@ -25,7 +25,7 @@ public abstract class OctoPrintFileInformation implements Jsonable, JSONLoader {
 	}
 
 	public String getName(){
-		return m_data.get("name").toString();
+		return m_data.getString("name");
 	}
 	
 	/**
@@ -36,7 +36,7 @@ public abstract class OctoPrintFileInformation implements Jsonable, JSONLoader {
 	}
 	
 	public String getPath(){
-		return m_data.get("path").toString();
+		return m_data.getString("path");
 	}
 	
 	@Override
