@@ -48,7 +48,7 @@ public class PrinterCommand extends OctoPrintCommand {
 	}
 	
 	/**
-	 * @param num the extruder num to check (0 indexex)
+	 * @param num the extruder num to check (0 index)
 	 * @return temperature information for this extruder, null if it doesn't exist
 	 */
 	public TemperatureInfo getExtruderTemp(int num){

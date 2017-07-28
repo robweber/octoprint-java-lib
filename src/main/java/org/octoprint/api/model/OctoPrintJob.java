@@ -102,14 +102,23 @@ public final class OctoPrintJob implements JSONAware, JSONLoader {
 
 		}
 
+		/**
+		 * @return the percentage the job is complete as a decimal, .05 = 5% 1 = 100%
+		 */
 		public Double percentComplete(){
 			return new Double(m_json.get("completion").toString());
 		}
 
+		/**
+		 * @return elapsed time since the job was started, in seconds
+		 */
 		public Long elapsedTime(){
 			return new Long(m_json.get("printTime").toString());
 		}
 
+		/**
+		 * @return estimated time remaining on the print, in seconds
+		 */
 		public Long timeRemaining(){
 			return new Long(m_json.get("printTimeLeft").toString());
 		}

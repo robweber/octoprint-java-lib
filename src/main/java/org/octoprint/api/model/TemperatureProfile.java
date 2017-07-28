@@ -21,10 +21,16 @@ public class TemperatureProfile implements JSONAware, JSONLoader {
 		return m_json.get("name").toString();
 	}
 	
+	/**
+	 * @return the bed temp of this profile, in degrees celsius
+	 */
 	public Long getBedTemp(){
 		return new Long(m_json.get("bed").toString());
 	}
 	
+	/**
+	 * @return the extruder temp of this profile, in degrees celsius
+	 */
 	public Long getExtruderTemp(){
 		return new Long(m_json.get("extruder").toString());
 	}

@@ -100,7 +100,7 @@ public class OctoPrintFolder extends OctoPrintFileInformation {
 	}
 	
 	/**
-	 * @return the size in bytes of the entire folder
+	 * @return the size, in bytes, of the entire folder
 	 */
 	public Long getSize(){
 		return new Long(m_data.get("size").toString());

@@ -29,14 +29,14 @@ public class TemperatureInfo implements JSONAware, JSONLoader{
 	}
 	
 	/**
-	 * @return the actual Temp of the tool
+	 * @return the actual Temp of the tool in degrees celsius
 	 */
 	public Double getActualTemp(){
 		return new Double(m_data.get("actual").toString());
 	}
 	
 	/**
-	 * @return the target temp, returns -1 if no target is set
+	 * @return the target temp in degrees celsius, returns -1 if no target is set
 	 */
 	public Double getTargetTemp(){
 		Double result = new Double(-1);	//-1 if no target is set
