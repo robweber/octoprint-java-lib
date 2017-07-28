@@ -15,7 +15,7 @@ public final class PrinterState implements JSONAware, JSONLoader {
 	private String m_text = null;
 	
 	public PrinterState() {
-		
+		m_json = new JSONObject();
 	}
 
 	public boolean isOperational(){

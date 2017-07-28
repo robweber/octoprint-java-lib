@@ -14,6 +14,7 @@ public final class TemperatureInfo implements JSONAware, JSONLoader{
 	private JSONObject m_data = null;
 	
 	public TemperatureInfo() {
+		m_data = new JSONObject();
 		m_name = "Printer Device";
 	}
 

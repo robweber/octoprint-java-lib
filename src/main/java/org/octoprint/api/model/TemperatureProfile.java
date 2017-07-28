@@ -14,7 +14,7 @@ public final class TemperatureProfile implements JSONAware, JSONLoader {
 	private JSONObject m_json = null;
 	
 	public TemperatureProfile() {
-		
+		m_json = new JSONObject();
 	}
 
 	public String getName(){
