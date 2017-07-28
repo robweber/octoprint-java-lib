@@ -15,7 +15,7 @@ public class OctoPrintJob implements JSONAware, JSONLoader {
 	private JobProgress m_progress = null;
 
 	public OctoPrintJob() {
-
+		m_job = new JSONObject();
 	}
 
 	/**
@@ -59,12 +59,9 @@ public class OctoPrintJob implements JSONAware, JSONLoader {
 	 * @return filament consumption details
 	 */
 	public FilamentDetails getFilamentDetails(final int toolIndex) {
-		if(this.m_job == null) 
-		{
-			return null;
-		}
 		
 		JSONObject m_filament = (JSONObject) this.m_job.get("filament");
+		
 		if(m_filament == null) 
 		{
 			return null;
