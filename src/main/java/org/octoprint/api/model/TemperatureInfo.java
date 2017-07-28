@@ -43,7 +43,15 @@ public final class TemperatureInfo implements Jsonable, JSONLoader{
 	 * @return the target temp in degrees celsius, returns -1 if no target is set
 	 */
 	public Double getTargetTemp(){
-		return m_data.getDoubleOrDefault("target", -1);
+		Double result = new Double(-1);	//-1 if no target is set
+		
+		//can't use contains here, the value may exist and just be null
+		if(m_data.get("target") != null)
+		{
+			result = m_data.getDouble("target");
+		}
+		
+		return result;
 	}
 	
 	/**
