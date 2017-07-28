@@ -35,7 +35,7 @@ public class FileTest {
 		
 		assertEquals("Hash","...",fileObj.getHash()); //no real hash, just a test of the value
 		assertEquals("Size",(long)1468987,fileObj.getSize().longValue());
-		assertEquals("Timestamp",(long)1378847754000L,fileObj.getTimestamp().longValue());
+		assertEquals("Timestamp",(long)1378847754,fileObj.getTimestamp().longValue());
 	}
 	
 	@Test

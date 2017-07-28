@@ -26,6 +26,9 @@ public abstract class OctoPrintFileInformation implements JSONAware, JSONLoader 
 		return m_data.get("name").toString();
 	}
 	
+	/**
+	 * @return the type of file (gcode,model,folder)
+	 */
 	public FileType getType(){
 		return m_type;
 	}

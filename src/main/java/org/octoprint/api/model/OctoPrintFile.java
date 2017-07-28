@@ -7,7 +7,7 @@ import org.json.simple.JSONObject;
  * 
  * @author rweber
  */
-public class OctoPrintFile extends OctoPrintFileInformation {
+public final class OctoPrintFile extends OctoPrintFileInformation {
 
 	public OctoPrintFile(FileType t, JSONObject json) {
 		super(t,json);
@@ -25,13 +25,13 @@ public class OctoPrintFile extends OctoPrintFileInformation {
 	}
 	
 	/**
-	 * @return the timestamp of when this file was uploaded return in milliseconds
+	 * @return the timestamp of when this file was uploaded, seconds
 	 */
 	public Long getTimestamp(){
 		Long unix = new Long(m_data.get("date").toString());
 		
 		//convert to milliseconds
-		return new Long(unix.longValue() * 1000);
+		return new Long(unix.longValue());
 	}
 	
 	/**

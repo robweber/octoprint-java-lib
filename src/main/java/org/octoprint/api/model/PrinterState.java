@@ -10,12 +10,12 @@ import org.octoprint.api.util.JSONLoader;
  * @author rweber
  * 
  */
-public class PrinterState implements JSONAware, JSONLoader {
+public final class PrinterState implements JSONAware, JSONLoader {
 	private JSONObject m_json = null;
 	private String m_text = null;
 	
 	public PrinterState() {
-		
+		m_json = new JSONObject();
 	}
 
 	public boolean isOperational(){

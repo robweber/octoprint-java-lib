@@ -20,7 +20,7 @@ public class JobCommand extends OctoPrintCommand {
 	 * @param newState the new state of the job (start|restart|pause|cancel)
 	 * @return if this operation succeeded, will fail if no file is loaded
 	 */
-	public boolean updateJob(JobState newState){
+	public boolean updateJob(final JobState newState){
 		OctoPrintHttpRequest request = this.createRequest();
 		
 		//set request type and command to send

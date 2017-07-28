@@ -16,7 +16,7 @@ public class ConnectionCommand extends OctoPrintCommand {
 		super(requestor, "connection");
 	}
 	
-	private boolean connectionCommand(String type){
+	private boolean connectionCommand(final String type){
 		OctoPrintHttpRequest request = this.createRequest();
 		
 		//set request type and command to send

@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.octoprint.api.JobCommand;
 import org.octoprint.api.OctoPrintInstance;
+import org.octoprint.api.model.OctoPrintJob;
 import org.octoprint.api.model.OctoPrintJob.JobProgress;
 import org.octoprint.api.test.util.JSONAnswer;
 
@@ -58,6 +59,27 @@ public class JobCommandTest {
 
 		p = command.getJobDetails().getJobProgress();
 		assertEquals("100 Percent Complete",1,p.percentComplete(),0.01);
+	}
+
+	@Test
+	public void filamentDetailsTest(){
+
+		//check a job with filament length 810 and filament volume 5.36
+		OctoPrintJob.FilamentDetails f = command.getJobDetails().getFilamentDetails(0);
+		assertEquals("Filament length", 810, (long) f.length());
+		assertEquals("Filament volume",5.36, f.volume(),0.01);
+
+		//check a job at 100%
+		OctoPrintInstance i2 = Mockito.mock(OctoPrintInstance.class,new JSONAnswer("2extruders_job.json"));
+		command = new JobCommand(i2);
+
+		//check a job with filament0 length 810 and filament0 volume 5.36 and filament1 length 10 and filament1 volume 1
+		f = command.getJobDetails().getFilamentDetails(0);
+		assertEquals("Filament length", 818, (long) f.length());
+		assertEquals("Filament volume",1.97, f.volume(),0.01);
+		f = command.getJobDetails().getFilamentDetails(1);
+		assertEquals("Filament length", 10, (long) f.length());
+		assertEquals("Filament volume",1, f.volume(),0.01);
 	}
 
 	@Test
