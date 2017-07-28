@@ -1,0 +1,31 @@
+{
+  "job": {
+	"averagePrintTime": 349.8792800307274,
+	"estimatedPrintTime": 689,
+	"filament": {
+	  "tool0": {
+		"length": 818,
+		"volume": 1.9675205740810324
+	  },
+	  "tool1": {
+		"length": 10,
+		"volume": 1
+	  }
+	},
+	"file": {
+	  "date": 1500944727,
+	  "name": "LED-Mount.gco",
+	  "origin": "local",
+	  "path": "LED-Mount.gco",
+	  "size": 235861
+	},
+	"lastPrintTime": 350.32894706726074
+  },
+  "progress": {
+	"completion": 100,
+	"filepos": 235861,
+	"printTime": 350,
+	"printTimeLeft": 0
+  },
+  "state": "Operational"
+}
