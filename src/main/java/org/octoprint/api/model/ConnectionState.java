@@ -9,7 +9,7 @@ import org.octoprint.api.util.JSONLoader;
  * 
  * @author rweber
  */
-public class ConnectionState implements JSONAware, JSONLoader {
+public final class ConnectionState implements JSONAware, JSONLoader {
 	private JSONObject m_json = null;
 	
 	public ConnectionState() {

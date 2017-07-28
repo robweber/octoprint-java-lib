@@ -11,7 +11,7 @@ import org.json.simple.JSONObject;
  * 
  * @author rweber
  */
-public class OctoPrintFolder extends OctoPrintFileInformation {
+public final class OctoPrintFolder extends OctoPrintFileInformation {
 	private List<OctoPrintFileInformation> m_children = null;
 	
 	public OctoPrintFolder(FileType t, JSONObject json) {

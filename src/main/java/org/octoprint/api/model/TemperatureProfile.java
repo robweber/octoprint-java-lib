@@ -10,7 +10,7 @@ import org.octoprint.api.util.JSONLoader;
  * 
  * @author rweber
  */
-public class TemperatureProfile implements JSONAware, JSONLoader {
+public final class TemperatureProfile implements JSONAware, JSONLoader {
 	private JSONObject m_json = null;
 	
 	public TemperatureProfile() {

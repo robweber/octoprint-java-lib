@@ -7,7 +7,7 @@ import org.json.simple.JSONObject;
  * 
  * @author rweber
  */
-public class OctoPrintFile extends OctoPrintFileInformation {
+public final class OctoPrintFile extends OctoPrintFileInformation {
 
 	public OctoPrintFile(FileType t, JSONObject json) {
 		super(t,json);
