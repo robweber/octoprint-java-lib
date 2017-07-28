@@ -51,7 +51,7 @@ public class PrinterCommand extends OctoPrintCommand {
 	 * @param num the extruder num to check (0 index)
 	 * @return temperature information for this extruder, null if it doesn't exist
 	 */
-	public TemperatureInfo getExtruderTemp(int num){
+	public TemperatureInfo getExtruderTemp(final int num){
 		TemperatureInfo result = null;	//may be null if num doesn't exist
 		
 		JSONObject json = this.g_comm.executeQuery(this.createRequest());
@@ -96,7 +96,7 @@ public class PrinterCommand extends OctoPrintCommand {
 	 * @return if this operation succeeded
 	 */
 	@SuppressWarnings("unchecked")
-	public boolean sendExtruderCommand(ToolCommand command, int extruder, int value){
+	public boolean sendExtruderCommand(ToolCommand command, final int extruder, final int value){
 		boolean result = true;
 		JSONObject params = null;
 		
@@ -149,7 +149,7 @@ public class PrinterCommand extends OctoPrintCommand {
 	 * @return if this operation succeeded
 	 */
 	@SuppressWarnings("unchecked")
-	public boolean sendBedCommand(ToolCommand command, int value){
+	public boolean sendBedCommand(ToolCommand command, final int value){
 		boolean result = false;
 		
 		//the bed can only use these two commands
@@ -207,7 +207,7 @@ public class PrinterCommand extends OctoPrintCommand {
 	 * @param amount the amount to movie it (positive or negative)
 	 * @return if this operation succeeded
 	 */
-	public boolean moveOnAxis(Axis axis, double amount){
+	public boolean moveOnAxis(Axis axis, final double amount){
 		OctoPrintHttpRequest request = this.createRequest("printhead");
 		
 		//set request type and command to send
