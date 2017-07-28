@@ -1,6 +1,6 @@
 package org.octoprint.api.model;
 
-import org.json.simple.JSONObject;
+import org.json.simple.JsonObject;
 
 /**
  * Implementation of the File type as described in the API http://docs.octoprint.org/en/master/api/datamodel.html#files
@@ -9,7 +9,7 @@ import org.json.simple.JSONObject;
  */
 public final class OctoPrintFile extends OctoPrintFileInformation {
 
-	public OctoPrintFile(FileType t, JSONObject json) {
+	public OctoPrintFile(FileType t, JsonObject json) {
 		super(t,json);
 	}
 
@@ -40,7 +40,7 @@ public final class OctoPrintFile extends OctoPrintFileInformation {
 	public Long getPrintTime(){
 		Long result = new Long(0);
 		
-		JSONObject gcode = (JSONObject)m_data.get("gcodeAnalysis");
+		JsonObject gcode = (JsonObject)m_data.get("gcodeAnalysis");
 		
 		if(gcode != null)
 		{

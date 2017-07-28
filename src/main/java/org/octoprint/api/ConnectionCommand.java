@@ -1,6 +1,6 @@
 package org.octoprint.api;
 
-import org.json.simple.JSONObject;
+import org.json.simple.JsonObject;
 import org.octoprint.api.model.ConnectionState;
 import org.octoprint.api.util.JSONUtils;
 
@@ -29,11 +29,11 @@ public class ConnectionCommand extends OctoPrintCommand {
 	public ConnectionState getCurrentState(){
 		ConnectionState result = null;
 		
-		JSONObject json = g_comm.executeQuery(this.createRequest());
+		JsonObject json = g_comm.executeQuery(this.createRequest());
 		
 		if(json != null && json.containsKey("current"))
 		{
-			result = JSONUtils.createObject((JSONObject)json.get("current"), ConnectionState.class.getName());
+			result = JSONUtils.createObject((JsonObject)json.get("current"), ConnectionState.class.getName());
 		}
 		
 		return result;

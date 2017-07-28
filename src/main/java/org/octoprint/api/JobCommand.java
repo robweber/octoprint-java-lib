@@ -1,6 +1,6 @@
 package org.octoprint.api;
 
-import org.json.simple.JSONObject;
+import org.json.simple.JsonObject;
 import org.octoprint.api.model.OctoPrintJob;
 import org.octoprint.api.util.JSONUtils;
 
@@ -38,7 +38,7 @@ public class JobCommand extends OctoPrintCommand {
 	public OctoPrintJob getJobDetails(){
 		OctoPrintJob result = null;
 		
-		JSONObject json = this.g_comm.executeQuery(this.createRequest());
+		JsonObject json = this.g_comm.executeQuery(this.createRequest());
 		
 		if(json != null)
 		{

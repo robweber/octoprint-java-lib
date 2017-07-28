@@ -5,8 +5,10 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
+
+import org.json.simple.DeserializationException;
+import org.json.simple.JsonObject;
+import org.json.simple.Jsoner;
 
 /**
  * Stores information on the OctoPrint instance for communication. Used by all OctoPrintCommand classes to send/receive data. 
@@ -82,8 +84,8 @@ public class OctoPrintInstance {
 		return result;
 	}
 	
-	protected JSONObject executeQuery(OctoPrintHttpRequest request){
-		JSONObject result = null;
+	protected JsonObject executeQuery(OctoPrintHttpRequest request){
+		JsonObject result = null;
 		
 		//create the connection and get the result
 		HttpURLConnection connection = this.createConnection(request);
@@ -92,7 +94,11 @@ public class OctoPrintInstance {
 		
 		if(jsonString != null && !jsonString.isEmpty())
 		{
-			result = (JSONObject)JSONValue.parse(jsonString);
+			try {
+				result = (JsonObject)Jsoner.deserialize(jsonString);
+			} catch (DeserializationException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return result;

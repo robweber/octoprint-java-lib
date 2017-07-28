@@ -3,8 +3,9 @@ package org.octoprint.api.model;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+
+import org.json.simple.JsonArray;
+import org.json.simple.JsonObject;
 
 /**
  * Implementation of the folder type as described in the API http://docs.octoprint.org/en/master/api/datamodel.html#folders
@@ -14,7 +15,7 @@ import org.json.simple.JSONObject;
 public final class OctoPrintFolder extends OctoPrintFileInformation {
 	private List<OctoPrintFileInformation> m_children = null;
 	
-	public OctoPrintFolder(FileType t, JSONObject json) {
+	public OctoPrintFolder(FileType t, JsonObject json) {
 		super(t, json);
 		
 		//build the children now so we aren't doing it with ever 'get' call
@@ -24,13 +25,13 @@ public final class OctoPrintFolder extends OctoPrintFileInformation {
 	private void buildChildren(){
 		m_children = new ArrayList<OctoPrintFileInformation>();
 		
-		JSONArray children = (JSONArray)m_data.get("children");
-		JSONObject aChild = null;
+		JsonArray children = (JsonArray)m_data.get("children");
+		JsonObject aChild = null;
 		FileType t = null;
 		
 		for(int count = 0; count < children.size(); count ++)
 		{
-			aChild = (JSONObject)children.get(count);
+			aChild = (JsonObject)children.get(count);
 			
 			//get the type of child
 			t = FileType.findType(aChild.get("type").toString());

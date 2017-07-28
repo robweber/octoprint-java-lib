@@ -5,8 +5,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
+import org.json.simple.JsonObject;
+import org.json.simple.Jsoner;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
@@ -17,7 +17,7 @@ import org.mockito.stubbing.Answer;
  * @author rweber
  *
  */
-public class JSONAnswer implements Answer<JSONObject>{
+public class JSONAnswer implements Answer<JsonObject>{
 	private String m_json = null;
 	
 	public JSONAnswer(String filename) {
@@ -52,8 +52,8 @@ public class JSONAnswer implements Answer<JSONObject>{
 	}
 	
 	@Override
-	public JSONObject answer(InvocationOnMock arg0) throws Throwable {
-		return (JSONObject)JSONValue.parse(m_json);
+	public JsonObject answer(InvocationOnMock arg0) throws Throwable {
+		return (JsonObject)Jsoner.deserialize(m_json);
 	}
 
 }

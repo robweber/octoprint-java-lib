@@ -1,7 +1,10 @@
 package org.octoprint.api.model;
 
-import org.json.simple.JSONAware;
-import org.json.simple.JSONObject;
+import java.io.IOException;
+import java.io.Writer;
+
+import org.json.simple.JsonObject;
+import org.json.simple.Jsonable;
 import org.octoprint.api.util.JSONLoader;
 
 /**
@@ -10,12 +13,12 @@ import org.octoprint.api.util.JSONLoader;
  * @author rweber
  * 
  */
-public final class PrinterState implements JSONAware, JSONLoader {
-	private JSONObject m_json = null;
+public final class PrinterState implements Jsonable, JSONLoader {
+	private JsonObject m_json = null;
 	private String m_text = null;
 	
 	public PrinterState() {
-		m_json = new JSONObject();
+		m_json = new JsonObject();
 	}
 
 	public boolean isOperational(){
@@ -48,20 +51,24 @@ public final class PrinterState implements JSONAware, JSONLoader {
 	}
 	
 	@Override
-	public void loadJSON(JSONObject json) {
-		m_json = (JSONObject)json.get("flags");
+	public void loadJSON(JsonObject json) {
+		m_json = (JsonObject)json.get("flags");
 		m_text = json.get("text").toString();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public String toJSONString() {
-		JSONObject result = new JSONObject();
+	public String toJson() {
+		JsonObject result = new JsonObject();
 		
 		result.put("flags",m_json);
 		result.put("text",m_text);
 		
-		return result.toJSONString();
+		return result.toJson();
+	}
+
+	@Override
+	public void toJson(Writer arg0) throws IOException {
+		arg0.write(this.toJson());
 	}
 
 }

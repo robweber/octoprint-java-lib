@@ -1,6 +1,6 @@
 package org.octoprint.api;
 
-import org.json.simple.JSONObject;
+import org.json.simple.JsonObject;
 
 /**
  * An object to encapsulate the http request 
@@ -11,12 +11,12 @@ import org.json.simple.JSONObject;
 public class OctoPrintHttpRequest {
 	private String m_url = null;
 	private String m_type = null;
-	private JSONObject m_params = null;
+	private JsonObject m_params = null;
 	
 	public OctoPrintHttpRequest(String url) {
 		m_url = "/api/" + url;
 		m_type = "GET";
-		m_params = new JSONObject();
+		m_params = new JsonObject();
 	}
 	
 	protected String getURL(){
@@ -28,7 +28,7 @@ public class OctoPrintHttpRequest {
 	}
 	
 	protected String getParams(){
-		return m_params.toJSONString();
+		return m_params.toJson();
 	}
 	
 	public void setType(String type){
@@ -40,7 +40,7 @@ public class OctoPrintHttpRequest {
 		m_params.put(name,value);
 	}
 	
-	public void setPayload(JSONObject json){
+	public void setPayload(JsonObject json){
 		m_params = json;
 	}
 	

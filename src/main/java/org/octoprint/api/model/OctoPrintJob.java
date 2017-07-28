@@ -1,7 +1,10 @@
 package org.octoprint.api.model;
 
-import org.json.simple.JSONAware;
-import org.json.simple.JSONObject;
+import java.io.IOException;
+import java.io.Writer;
+
+import org.json.simple.JsonObject;
+import org.json.simple.Jsonable;
 import org.octoprint.api.util.JSONLoader;
 
 /**
@@ -10,12 +13,12 @@ import org.octoprint.api.util.JSONLoader;
  * @author rweber
  *
  */
-public final class OctoPrintJob implements JSONAware, JSONLoader {
-	private JSONObject m_job = null;
+public final class OctoPrintJob implements Jsonable, JSONLoader {
+	private JsonObject m_job = null;
 	private JobProgress m_progress = null;
 
 	public OctoPrintJob() {
-		m_job = new JSONObject();
+		m_job = new JsonObject();
 	}
 
 	/**
@@ -26,7 +29,7 @@ public final class OctoPrintJob implements JSONAware, JSONLoader {
 
 		if(m_job.containsKey("file"))
 		{
-			JSONObject file = (JSONObject)m_job.get("file");
+			JsonObject file = (JsonObject)m_job.get("file");
 
 			if(file.get("name") != null)
 			{
@@ -60,7 +63,7 @@ public final class OctoPrintJob implements JSONAware, JSONLoader {
 	 */
 	public FilamentDetails getFilamentDetails(final int toolIndex) {
 		
-		JSONObject m_filament = (JSONObject) this.m_job.get("filament");
+		JsonObject m_filament = (JsonObject) this.m_job.get("filament");
 		
 		if(m_filament == null) 
 		{
@@ -70,7 +73,7 @@ public final class OctoPrintJob implements JSONAware, JSONLoader {
 		//multiple extruders have different json layout
 		if(toolIndex != 0 || !(m_filament.containsKey("length") && m_filament.containsKey("volume"))) 
 		{
-			m_filament = (JSONObject) m_filament.get("tool"+toolIndex);
+			m_filament = (JsonObject) m_filament.get("tool"+toolIndex);
 		}
 		
 		final FilamentDetails details = new FilamentDetails();
@@ -80,23 +83,28 @@ public final class OctoPrintJob implements JSONAware, JSONLoader {
 	}
 
 	@Override
-	public void loadJSON(JSONObject json) {
-		m_job = (JSONObject)json.get("job");
+	public void loadJSON(JsonObject json) {
+		m_job = (JsonObject)json.get("job");
 
 		if(json.containsKey("progress"))
 		{
 			m_progress = new JobProgress();
-			m_progress.loadJSON((JSONObject)json.get("progress"));
+			m_progress.loadJSON((JsonObject)json.get("progress"));
 		}
 	}
 
 	@Override
-	public String toJSONString() {
-		return m_job.toJSONString();
+	public String toJson() {
+		return m_job.toJson();
+	}
+	
+	@Override
+	public void toJson(Writer arg0) throws IOException {
+		arg0.write(this.toJson());
 	}
 
-	public final class JobProgress implements JSONAware, JSONLoader {
-		private JSONObject m_json = null;
+	public final class JobProgress implements Jsonable, JSONLoader {
+		private JsonObject m_json = null;
 
 		private JobProgress(){
 
@@ -124,13 +132,18 @@ public final class OctoPrintJob implements JSONAware, JSONLoader {
 		}
 
 		@Override
-		public void loadJSON(JSONObject json) {
+		public void loadJSON(JsonObject json) {
 			m_json = json;
 		}
 
 		@Override
-		public String toJSONString() {
-			return m_json.toJSONString();
+		public String toJson() {
+			return m_json.toJson();
+		}
+
+		@Override
+		public void toJson(Writer arg0) throws IOException {
+			arg0.write(this.toJson());
 		}
 
 	}
@@ -138,8 +151,8 @@ public final class OctoPrintJob implements JSONAware, JSONLoader {
 	/**
 	 * Provides information about filament usage.
 	 */
-	public static final class FilamentDetails implements JSONAware, JSONLoader {
-		private JSONObject m_json = null;
+	public static final class FilamentDetails implements Jsonable, JSONLoader {
+		private JsonObject m_json = null;
 
 		private FilamentDetails(){
 
@@ -173,7 +186,7 @@ public final class OctoPrintJob implements JSONAware, JSONLoader {
 		 * {@inheritDoc}
 		 */
 		@Override
-		public void loadJSON(final JSONObject json) {
+		public void loadJSON(final JsonObject json) {
 			m_json = json;
 		}
 
@@ -181,8 +194,13 @@ public final class OctoPrintJob implements JSONAware, JSONLoader {
 		 * {@inheritDoc}
 		 */
 		@Override
-		public String toJSONString() {
-			return this.m_json.toJSONString();
+		public String toJson() {
+			return this.m_json.toJson();
+		}
+
+		@Override
+		public void toJson(Writer arg0) throws IOException {
+			arg0.write(this.toJson());
 		}
 
 	}

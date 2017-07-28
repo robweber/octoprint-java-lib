@@ -1,6 +1,6 @@
 package org.octoprint.api.test.util;
 
-import org.json.simple.JSONObject;
+import org.json.simple.JsonObject;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
@@ -10,14 +10,14 @@ import org.mockito.stubbing.Answer;
  * @author rweber
  *
  */
-public class NullAnswer implements Answer<JSONObject>{
+public class NullAnswer implements Answer<JsonObject>{
 
 	public NullAnswer() {
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public JSONObject answer(InvocationOnMock arg0) throws Throwable {
+	public JsonObject answer(InvocationOnMock arg0) throws Throwable {
 		//octoprint didn't send back anything
 		return null;
 	}

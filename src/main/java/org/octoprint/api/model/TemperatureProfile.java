@@ -1,7 +1,10 @@
 package org.octoprint.api.model;
 
-import org.json.simple.JSONAware;
-import org.json.simple.JSONObject;
+import java.io.IOException;
+import java.io.Writer;
+
+import org.json.simple.JsonObject;
+import org.json.simple.Jsonable;
 import org.octoprint.api.util.JSONLoader;
 
 
@@ -10,11 +13,11 @@ import org.octoprint.api.util.JSONLoader;
  * 
  * @author rweber
  */
-public final class TemperatureProfile implements JSONAware, JSONLoader {
-	private JSONObject m_json = null;
+public final class TemperatureProfile implements Jsonable, JSONLoader {
+	private JsonObject m_json = null;
 	
 	public TemperatureProfile() {
-		m_json = new JSONObject();
+		m_json = new JsonObject();
 	}
 
 	public String getName(){
@@ -41,13 +44,18 @@ public final class TemperatureProfile implements JSONAware, JSONLoader {
 	}
 	
 	@Override
-	public void loadJSON(JSONObject json) {
+	public void loadJSON(JsonObject json) {
 		m_json = json;
 	}
 
 	@Override
-	public String toJSONString() {
-		return m_json.toJSONString();
+	public String toJson() {
+		return m_json.toJson();
+	}
+
+	@Override
+	public void toJson(Writer arg0) throws IOException {
+		arg0.write(this.toJson());
 	}
 
 }

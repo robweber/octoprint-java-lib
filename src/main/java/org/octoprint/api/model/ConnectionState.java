@@ -1,7 +1,9 @@
 package org.octoprint.api.model;
+import java.io.IOException;
+import java.io.Writer;
 
-import org.json.simple.JSONAware;
-import org.json.simple.JSONObject;
+import org.json.simple.JsonObject;
+import org.json.simple.Jsonable;
 import org.octoprint.api.util.JSONLoader;
 
 /**
@@ -9,11 +11,11 @@ import org.octoprint.api.util.JSONLoader;
  * 
  * @author rweber
  */
-public final class ConnectionState implements JSONAware, JSONLoader {
-	private JSONObject m_json = null;
+public final class ConnectionState implements Jsonable, JSONLoader {
+	private JsonObject m_json = null;
 	
 	public ConnectionState() {
-		m_json = new JSONObject();
+		m_json = new JsonObject();
 	}
 
 	/**
@@ -60,13 +62,18 @@ public final class ConnectionState implements JSONAware, JSONLoader {
 	}
 	
 	@Override
-	public void loadJSON(JSONObject json) {
+	public void loadJSON(JsonObject json) {
 		m_json = json;
 	}
 
 	@Override
-	public String toJSONString() {
-		return m_json.toJSONString();
+	public String toJson() {
+		return m_json.toJson();
+	}
+
+	@Override
+	public void toJson(Writer arg0) throws IOException {
+		arg0.write(this.toJson());
 	}
 
 }
