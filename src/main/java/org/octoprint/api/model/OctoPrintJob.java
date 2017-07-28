@@ -59,18 +59,26 @@ public class OctoPrintJob implements JSONAware, JSONLoader {
 	 * @return filament consumption details
 	 */
 	public FilamentDetails getFilamentDetails(final int toolIndex) {
-		if(this.m_job == null) {
+		if(this.m_job == null) 
+		{
 			return null;
 		}
+		
 		JSONObject m_filament = (JSONObject) this.m_job.get("filament");
-		if(m_filament == null) {
+		if(m_filament == null) 
+		{
 			return null;
 		}
-		if(toolIndex != 0 || !(m_filament.containsKey("length") && m_filament.containsKey("volume"))) {
+		
+		//multiple extruders have different json layout
+		if(toolIndex != 0 || !(m_filament.containsKey("length") && m_filament.containsKey("volume"))) 
+		{
 			m_filament = (JSONObject) m_filament.get("tool"+toolIndex);
 		}
+		
 		final FilamentDetails details = new FilamentDetails();
 		details.loadJSON(m_filament);
+		
 		return details;
 	}
 
