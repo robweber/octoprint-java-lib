@@ -10,7 +10,7 @@ import org.octoprint.api.util.JSONLoader;
  * @author rweber
  *
  */
-public class OctoPrintJob implements JSONAware, JSONLoader {
+public final class OctoPrintJob implements JSONAware, JSONLoader {
 	private JSONObject m_job = null;
 	private JobProgress m_progress = null;
 
@@ -95,10 +95,10 @@ public class OctoPrintJob implements JSONAware, JSONLoader {
 		return m_job.toJSONString();
 	}
 
-	public class JobProgress implements JSONAware, JSONLoader {
+	public final class JobProgress implements JSONAware, JSONLoader {
 		private JSONObject m_json = null;
 
-		public JobProgress(){
+		private JobProgress(){
 
 		}
 
