@@ -36,7 +36,7 @@
       		<excludePackageNames>com.octoprint.api.test.*</excludePackageNames>
       		<outputDirectory>${project.basedir}/docs</outputDirectory>
       		<links>
-      			<link>https://cliftonlabs.github.io/json-simple/target/apidocs/index.html</link>
+      			<link>https://cliftonlabs.github.io/json-simple/target/apidocs/</link>
       		</links>
       	</configuration>
       	<executions>
