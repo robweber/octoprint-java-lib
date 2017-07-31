@@ -7,7 +7,7 @@ Please note that not all API functions are implemented here but most of them for
 
 ## Required Libs
 
-The json-simple library is required to encode/decode JSON objects. If you don't want to use maven here is a link: https://github.com/fangyidong/json-simple
+The json-simple library is required to encode/decode JSON objects. If you don't want to use maven here is a link: https://github.com/cliftonlabs/json-simple
 
 ## How to Use It
 
