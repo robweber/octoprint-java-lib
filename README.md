@@ -11,7 +11,7 @@ The json-simple library is required to encode/decode JSON objects. If you don't 
 
 ## How to Use It
 
-To use it simply create an OcotPrintInstance within your Java code and then use it to initate one of the Command classes.
+To use it simply create an OctoPrintInstance within your Java code and then use it to initate one of the Command classes.
 
 ```java
 
