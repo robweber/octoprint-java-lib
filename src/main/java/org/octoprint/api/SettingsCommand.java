@@ -45,7 +45,7 @@ public class SettingsCommand extends OctoPrintCommand {
 	 *
 	 * @return all the settings as a full JSON Object, could be null if no connectivity
 	 */
-	public JSONObject getAllSettings(){
+	public JSONObject getAllSettingsJSON(){
 		JSONObject result = this.g_comm.executeQuery(this.createRequest());
 
 		return result;
@@ -57,7 +57,7 @@ public class SettingsCommand extends OctoPrintCommand {
 	 * @return settings map
 	 */
 	public Map<String, String> getFlatSettingsMap(){
-		final JSONObject settingsNode = getAllSettings();
+		final JSONObject settingsNode = getAllSettingsJSON();
 		final Map<String, String> settings = new HashMap<>();
 		if(settingsNode != null) {
 			createFlatMap(settings, "", settingsNode);

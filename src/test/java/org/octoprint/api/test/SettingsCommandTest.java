@@ -28,7 +28,7 @@ public class SettingsCommandTest {
 
 	@Test
 	public void settingsTest(){
-		assertNotNull("Retrieve Settings",command.getAllSettings());
+		assertNotNull("Retrieve Settings",command.getAllSettingsJSON());
 	}
 
 	@Test
