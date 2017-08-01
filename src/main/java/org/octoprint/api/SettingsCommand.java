@@ -21,6 +21,27 @@ public class SettingsCommand extends OctoPrintCommand {
 	}
 
 	/**
+	 * recursive private method for creating the flat map structure from a JSONObject. JSONObjects within the passed in arg will call this method recursively. 
+	 * 
+	 * @param map current map
+	 * @param currentPath the path current on such as {@code "server.diskspace"}. all keys will be added to this path
+	 * @param currentNode the current JSONObject the function will parse
+	 */
+	private void createFlatMap(final Map<String, String> map, final String currentPath, final JSONObject currentNode) {
+		for(final Object key : currentNode.keySet()) {
+			final String keyPath = currentPath + key;
+			final Object value = currentNode.get(key);
+			if(value == null) {
+				map.put(keyPath, null);
+			} else if (value instanceof JSONObject) {
+				createFlatMap(map, keyPath + ".", (JSONObject) value);
+			} else {
+				map.put(keyPath, value.toString());
+			}
+		}
+	}
+	
+	/**
 	 *
 	 * @return all the settings as a full JSON Object, could be null if no connectivity
 	 */
@@ -42,20 +63,6 @@ public class SettingsCommand extends OctoPrintCommand {
 			createFlatMap(settings, "", settingsNode);
 		}
 		return settings;
-	}
-
-	private void createFlatMap(final Map<String, String> map, final String currentPath, final JSONObject currentNode) {
-		for(final Object key : currentNode.keySet()) {
-			final String keyPath = currentPath + key;
-			final Object value = currentNode.get(key);
-			if(value == null) {
-				map.put(keyPath, null);
-			} else if (value instanceof JSONObject) {
-				createFlatMap(map, keyPath + ".", (JSONObject) value);
-			} else {
-				map.put(keyPath, value.toString());
-			}
-		}
 	}
 
 	/**
