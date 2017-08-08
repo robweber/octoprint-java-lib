@@ -21,29 +21,12 @@ public class SettingsCommand extends OctoPrintCommand {
 	}
 
 	/**
-	 *
-	 * @return all the settings as a full JSON Object, could be null if no connectivity
+	 * recursive private method for creating the flat map structure from a JSONObject. JSONObjects within the passed in arg will call this method recursively. 
+	 * 
+	 * @param map current map
+	 * @param currentPath the path current on such as {@code "server.diskspace"}. all keys will be added to this path
+	 * @param currentNode the current JSONObject the function will parse
 	 */
-	public JSONObject getAllSettings(){
-		JSONObject result = this.g_comm.executeQuery(this.createRequest());
-
-		return result;
-	}
-
-	/**
-	 * Returns a map containing all settings as a flat map. Use the full identifier as key (e.g. {@code "server.diskspace.critical"} to get value as a string.
-	 *
-	 * @return settings map
-	 */
-	public Map<String, String> getFlatSettingsMap(){
-		final JSONObject settingsNode = getAllSettings();
-		final Map<String, String> settings = new HashMap<>();
-		if(settingsNode != null) {
-			createFlatMap(settings, "", settingsNode);
-		}
-		return settings;
-	}
-
 	private void createFlatMap(final Map<String, String> map, final String currentPath, final JSONObject currentNode) {
 		for(final Object key : currentNode.keySet()) {
 			final String keyPath = currentPath + key;
@@ -56,6 +39,30 @@ public class SettingsCommand extends OctoPrintCommand {
 				map.put(keyPath, value.toString());
 			}
 		}
+	}
+	
+	/**
+	 *
+	 * @return all the settings as a full JSON Object, could be null if no connectivity
+	 */
+	public JSONObject getAllSettingsJSON(){
+		JSONObject result = this.g_comm.executeQuery(this.createRequest());
+
+		return result;
+	}
+
+	/**
+	 * Returns a map containing all settings as a flat map. Use the full identifier as key (e.g. {@code "server.diskspace.critical"} to get value as a string.
+	 *
+	 * @return settings map
+	 */
+	public Map<String, String> getFlatSettingsMap(){
+		final JSONObject settingsNode = getAllSettingsJSON();
+		final Map<String, String> settings = new HashMap<>();
+		if(settingsNode != null) {
+			createFlatMap(settings, "", settingsNode);
+		}
+		return settings;
 	}
 
 	/**
