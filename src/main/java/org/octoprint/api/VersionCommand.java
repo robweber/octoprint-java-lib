@@ -1,6 +1,6 @@
 package org.octoprint.api;
 
-import org.json.simple.JSONObject;
+import org.json.simple.JsonObject;
 
 /**
  * Implementation of the Version (http://docs.octoprint.org/en/master/api/version.html) endpoint 
@@ -20,11 +20,11 @@ public class VersionCommand extends OctoPrintCommand{
 	public String getAPIVersion(){
 		String result = null;
 		
-		JSONObject json = g_comm.executeQuery(this.createRequest());
+		JsonObject json = g_comm.executeQuery(this.createRequest());
 		
 		if(json != null)
 		{
-			result = json.get("api").toString();
+			result = json.getString("api");
 		}
 		
 		return result;
@@ -36,11 +36,11 @@ public class VersionCommand extends OctoPrintCommand{
 	public String getServerVersion(){
 		String result = null;
 		
-		JSONObject json = g_comm.executeQuery(this.createRequest());
+		JsonObject json = g_comm.executeQuery(this.createRequest());
 		
 		if(json != null)
 		{
-			result = json.get("server").toString();
+			result = json.getString("server");
 		}
 		
 		return result;

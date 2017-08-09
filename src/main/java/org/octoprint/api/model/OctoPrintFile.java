@@ -1,6 +1,6 @@
 package org.octoprint.api.model;
 
-import org.json.simple.JSONObject;
+import org.json.simple.JsonObject;
 
 /**
  * Implementation of the File type as described in the API http://docs.octoprint.org/en/master/api/datamodel.html#files
@@ -9,29 +9,26 @@ import org.json.simple.JSONObject;
  */
 public final class OctoPrintFile extends OctoPrintFileInformation {
 
-	public OctoPrintFile(FileType t, JSONObject json) {
+	public OctoPrintFile(FileType t, JsonObject json) {
 		super(t,json);
 	}
 
 	public String getHash(){
-		return m_data.get("hash").toString();
+		return m_data.getString("hash");
 	}
 	
 	/**
 	 * @return the size in bytes
 	 */
 	public Long getSize(){
-		return new Long(m_data.get("size").toString());
+		return m_data.getLong("size");
 	}
 	
 	/**
 	 * @return the timestamp of when this file was uploaded, seconds
 	 */
 	public Long getTimestamp(){
-		Long unix = new Long(m_data.get("date").toString());
-		
-		//convert to milliseconds
-		return new Long(unix.longValue());
+		return m_data.getLong("date");
 	}
 	
 	/**
@@ -40,11 +37,11 @@ public final class OctoPrintFile extends OctoPrintFileInformation {
 	public Long getPrintTime(){
 		Long result = new Long(0);
 		
-		JSONObject gcode = (JSONObject)m_data.get("gcodeAnalysis");
+		JsonObject gcode = (JsonObject)m_data.get("gcodeAnalysis");
 		
 		if(gcode != null)
 		{
-			result = new Long(gcode.get("estimatedPrintTime").toString());
+			result = gcode.getLong("estimatedPrintTime");
 		}
 		
 		return result;

@@ -3,8 +3,8 @@ package org.octoprint.api;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import org.json.simple.JsonArray;
+import org.json.simple.JsonObject;
 import org.octoprint.api.model.FileType;
 import org.octoprint.api.model.OctoPrintFile;
 import org.octoprint.api.model.OctoPrintFileInformation;
@@ -22,7 +22,7 @@ public class FileCommand extends OctoPrintCommand {
 		
 	}
 
-	private OctoPrintFileInformation createFile(JSONObject json){
+	private OctoPrintFileInformation createFile(JsonObject json){
 		OctoPrintFileInformation result = null;
 		
 		//figure out what kind of file this is
@@ -49,18 +49,18 @@ public class FileCommand extends OctoPrintCommand {
 		List<OctoPrintFileInformation> result = null;
 		
 		//get a list of all the files
-		JSONObject json = this.g_comm.executeQuery(this.createRequest("local?recursive=true"));
+		JsonObject json = this.g_comm.executeQuery(this.createRequest("local?recursive=true"));
 		
 		if(json != null)
 		{
 			result = new ArrayList<OctoPrintFileInformation>();
 			
-			JSONArray children = (JSONArray)json.get("files");
+			JsonArray children = (JsonArray)json.getCollection("files");
 			
 			for(int count = 0; count < children.size(); count ++)
 			{
 				//for each file create the object and add to the array
-				result.add(this.createFile((JSONObject)children.get(count)));
+				result.add(this.createFile((JsonObject)children.get(count)));
 			}
 		}
 		
@@ -77,7 +77,7 @@ public class FileCommand extends OctoPrintCommand {
 		OctoPrintFileInformation result = null;	//returns null if file does not exist
 		
 		//try and find the file
-		JSONObject json = this.g_comm.executeQuery(this.createRequest("local/" + filename + "?recursive=true"));
+		JsonObject json = this.g_comm.executeQuery(this.createRequest("local/" + filename + "?recursive=true"));
 		
 		if(json != null)
 		{
