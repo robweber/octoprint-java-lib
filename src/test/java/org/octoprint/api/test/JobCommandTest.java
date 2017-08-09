@@ -29,7 +29,7 @@ public class JobCommandTest {
 	@Before
 	public void beforeTest(){
 		//create a fake instance for http simulation
-		OctoPrintInstance i = Mockito.mock(OctoPrintInstance.class,new JSONAnswer("job.json"));
+		OctoPrintInstance i = Mockito.mock(OctoPrintInstance.class,new JSONAnswer("job_running.json"));
 
 		command = new JobCommand(i);
 	}
@@ -37,6 +37,7 @@ public class JobCommandTest {
 	@Test
 	public void nameTest(){
 
+		assertTrue("Job Loaded",command.getJobDetails().isFileLoaded());
 		assertEquals("Job Name Correct",command.getJobDetails().getName(),"whistle_v2.gcode");
 	}
 
@@ -92,5 +93,38 @@ public class JobCommandTest {
 	public void timeRemainingTest(){
 		JobProgress p = command.getJobDetails().getJobProgress();
 		assertEquals("Time Remaining",(long)912,p.timeRemaining().longValue());
+	}
+	
+	@Test
+	public void noJobLoadedTest(){
+		OctoPrintInstance noJob = Mockito.mock(OctoPrintInstance.class,new JSONAnswer("job_none_loaded.json"));
+		command = new JobCommand(noJob);
+		
+		//is job loaded
+		assertFalse("Job Not Loaded",command.getJobDetails().isFileLoaded());
+		
+		//check the name
+		assertNull("Null Name",command.getJobDetails().getName());
+		
+		//check the print time
+		assertNull("Null Estimated Print Time",command.getJobDetails().getEstimatedPrintTime());
+		
+		assertNull("Null Job Progress",command.getJobDetails().getJobProgress());
+		
+		assertNull("Null Filament Details",command.getJobDetails().getFilamentDetails(0));
+	}
+	
+	@Test
+	public void noJobStartedTest(){
+		OctoPrintInstance noJob = Mockito.mock(OctoPrintInstance.class,new JSONAnswer("job_loaded_not_running.json"));
+		command = new JobCommand(noJob);
+		
+		//job is loaded
+		assertTrue("Job Loaded",command.getJobDetails().isFileLoaded());
+		assertEquals("Job Name Correct",command.getJobDetails().getName(),"whistle_v2.gcode");
+		assertEquals("Estimated Time Remaining",(long)8811,command.getJobDetails().getEstimatedPrintTime().longValue());
+		
+		//no progress
+		assertNull("Null Job Progress",command.getJobDetails().getJobProgress());
 	}
 }

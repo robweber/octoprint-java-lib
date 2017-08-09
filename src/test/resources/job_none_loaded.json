@@ -1,0 +1,22 @@
+{
+  "progress": {
+    "printTimeLeft": null,
+    "printTime": null,
+    "filepos": null,
+    "completion": 0
+  },
+  "state": "Operational",
+  "job": {
+    "estimatedPrintTime": null,
+    "file": {
+      "name": null,
+      "path": null,
+      "origin": null,
+      "date": null,
+      "size": null
+    },
+    "filament": null,
+    "lastPrintTime": null,
+    "averagePrintTime": null
+  }
+}

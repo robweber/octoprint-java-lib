@@ -22,6 +22,13 @@ public final class OctoPrintJob implements Jsonable, JSONLoader {
 	}
 
 	/**
+	 * @return {@code true} if a file is currently loaded, or printing, {@code false} if no file is loaded 
+	 */
+	public boolean isFileLoaded(){
+		return this.getName() != null; //if there is a name a file is loaded
+	}
+	
+	/**
 	 * @return the name of the file
 	 */
 	public String getName(){
@@ -45,11 +52,18 @@ public final class OctoPrintJob implements Jsonable, JSONLoader {
 	 * @return the estimated print time for the file, in seconds
 	 */
 	public Long getEstimatedPrintTime(){
-		return m_job.getLong("estimatedPrintTime");
+		Long result = null;
+		
+		if(m_job.get("estimatedPrintTime") != null)
+		{
+			result =  m_job.getLong("estimatedPrintTime");
+		}
+		
+		return result;
 	}
 
 	/**
-	 * @return current job progress
+	 * @return current job progress, will be null if no job is loaded
 	 */
 	public JobProgress getJobProgress(){
 		return m_progress;
@@ -84,9 +98,11 @@ public final class OctoPrintJob implements Jsonable, JSONLoader {
 
 	@Override
 	public void loadJSON(JsonObject json) {
+		
 		m_job = (JsonObject)json.get("job");
 
-		if(json.containsKey("progress"))
+		//make sure the progress exists and is not null
+		if(json.containsKey("progress") && ((JsonObject)json.get("progress")).get("printTime") != null)
 		{
 			m_progress = new JobProgress();
 			m_progress.loadJSON((JsonObject)json.get("progress"));
