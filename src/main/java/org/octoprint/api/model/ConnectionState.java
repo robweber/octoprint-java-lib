@@ -1,7 +1,9 @@
 package org.octoprint.api.model;
+import java.io.IOException;
+import java.io.Writer;
 
-import org.json.simple.JSONAware;
-import org.json.simple.JSONObject;
+import org.json.simple.JsonObject;
+import org.json.simple.Jsonable;
 import org.octoprint.api.util.JSONLoader;
 
 /**
@@ -9,11 +11,11 @@ import org.octoprint.api.util.JSONLoader;
  * 
  * @author rweber
  */
-public final class ConnectionState implements JSONAware, JSONLoader {
-	private JSONObject m_json = null;
+public final class ConnectionState implements Jsonable, JSONLoader {
+	private JsonObject m_json = null;
 	
 	public ConnectionState() {
-		m_json = new JSONObject();
+		m_json = new JsonObject();
 	}
 
 	/**
@@ -32,7 +34,7 @@ public final class ConnectionState implements JSONAware, JSONLoader {
 		
 		if(m_json.get("baudrate") != null)
 		{
-			result = new Long(m_json.get("baudrate").toString());
+			result = m_json.getLong("baudrate");
 		}
 		
 		return result;
@@ -42,31 +44,35 @@ public final class ConnectionState implements JSONAware, JSONLoader {
 	 * @return port as a string (most likely in the /dev/tty0 format)
 	 */
 	public String getPort(){
-		if(m_json.get("port") != null)
+		String result = null;
+		
+		if(m_json.containsKey("port"))
 		{
-			return m_json.get("port").toString();
+			result = m_json.getString("port");
 		}
-		else
-		{
-			return null;
-		}
+		
+		return result;
 	}
 	
 	/**
 	 * @return name of connection profile
 	 */
 	public String getPrinterProfile(){
-		return m_json.get("printerProfile").toString();
+		return m_json.getString("printerProfile");
 	}
 	
 	@Override
-	public void loadJSON(JSONObject json) {
+	public void loadJSON(JsonObject json) {
 		m_json = json;
 	}
 
 	@Override
-	public String toJSONString() {
-		return m_json.toJSONString();
+	public String toJson() {
+		return m_json.toJson();
 	}
 
+	@Override
+	public void toJson(Writer arg0) throws IOException {
+		arg0.write(this.toJson());
+	}
 }

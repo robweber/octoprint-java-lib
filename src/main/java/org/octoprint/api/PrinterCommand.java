@@ -1,7 +1,7 @@
 package org.octoprint.api;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import org.json.simple.JsonArray;
+import org.json.simple.JsonObject;
 import org.octoprint.api.model.Axis;
 import org.octoprint.api.model.PrinterState;
 import org.octoprint.api.model.TemperatureInfo;
@@ -19,7 +19,7 @@ public class PrinterCommand extends OctoPrintCommand {
 		super(requestor,"printer");
 	}
 
-	private boolean sendCommand(String path, JSONObject payload){
+	private boolean sendCommand(String path, JsonObject payload){
 		OctoPrintHttpRequest request = this.createRequest(path);
 		
 		//set request type and command to send
@@ -37,11 +37,11 @@ public class PrinterCommand extends OctoPrintCommand {
 	public PrinterState getCurrentState(){
 		PrinterState result = null;
 		
-		JSONObject json = this.g_comm.executeQuery(this.createRequest());
+		JsonObject json = this.g_comm.executeQuery(this.createRequest());
 		
 		if(json != null)
 		{
-			result = JSONUtils.createObject((JSONObject)json.get("state"), PrinterState.class.getName());
+			result = JSONUtils.createObject((JsonObject)json.get("state"), PrinterState.class.getName());
 		}
 		
 		return result;
@@ -54,16 +54,16 @@ public class PrinterCommand extends OctoPrintCommand {
 	public TemperatureInfo getExtruderTemp(final int num){
 		TemperatureInfo result = null;	//may be null if num doesn't exist
 		
-		JSONObject json = this.g_comm.executeQuery(this.createRequest());
+		JsonObject json = this.g_comm.executeQuery(this.createRequest());
 		
 		if(json != null)
 		{
-			JSONObject temp = (JSONObject)json.get("temperature");
+			JsonObject temp = (JsonObject)json.get("temperature");
 			
 			//now check if this extruder exists
 			if(temp.containsKey("tool" + num))
 			{
-				result = JSONUtils.createObject((JSONObject)temp.get("tool" + num),TemperatureInfo.class.getName());
+				result = JSONUtils.createObject((JsonObject)temp.get("tool" + num),TemperatureInfo.class.getName());
 				result.setName("Extruder " + num);
 			}
 		}
@@ -77,12 +77,12 @@ public class PrinterCommand extends OctoPrintCommand {
 	public TemperatureInfo getBedTemp(){
 		TemperatureInfo result = null;
 		
-		JSONObject json = this.g_comm.executeQuery(this.createRequest());
+		JsonObject json = this.g_comm.executeQuery(this.createRequest());
 		
 		if(json != null)
 		{
-			JSONObject temp = (JSONObject)json.get("temperature");
-			result = JSONUtils.createObject((JSONObject)temp.get("bed"),TemperatureInfo.class.getName());
+			JsonObject temp = (JsonObject)json.get("temperature");
+			result = JSONUtils.createObject((JsonObject)temp.get("bed"),TemperatureInfo.class.getName());
 			result.setName("Print Bed");
 		}
 		
@@ -95,17 +95,16 @@ public class PrinterCommand extends OctoPrintCommand {
 	 * @param value the value of the command (temperature, amount to extrude, etc)
 	 * @return if this operation succeeded
 	 */
-	@SuppressWarnings("unchecked")
 	public boolean sendExtruderCommand(ToolCommand command, final int extruder, final int value){
 		boolean result = true;
-		JSONObject params = null;
+		JsonObject params = null;
 		
 		String tool = "tool" + extruder;
 		
 		if(command == ToolCommand.EXTRUDE)
 		{
 			//we need to perform the select first
-			params = new JSONObject();
+			params = new JsonObject();
 			params.put("command",ToolCommand.SELECT_TOOL.getCommand());
 			params.put("tool",tool);
 			
@@ -115,17 +114,17 @@ public class PrinterCommand extends OctoPrintCommand {
 		//catch in case select doesn't work
 		if(result)
 		{
-			params = new JSONObject();
+			params = new JsonObject();
 			
 			if(command == ToolCommand.TARGET_TEMP)
 			{
-				JSONObject targets = new JSONObject();
+				JsonObject targets = new JsonObject();
 				targets.put(tool,value);
 				params.put("targets",targets);
 			}
 			else if(command == ToolCommand.TEMP_OFFSET)
 			{
-				JSONObject offsets = new JSONObject();
+				JsonObject offsets = new JsonObject();
 				offsets.put(tool,value);
 				params.put("offsets",offsets);
 			}
@@ -148,14 +147,13 @@ public class PrinterCommand extends OctoPrintCommand {
 	 * @param value the value of the command(temp, offset)
 	 * @return if this operation succeeded
 	 */
-	@SuppressWarnings("unchecked")
 	public boolean sendBedCommand(ToolCommand command, final int value){
 		boolean result = false;
 		
 		//the bed can only use these two commands
 		if(command == ToolCommand.TARGET_TEMP || command == ToolCommand.TEMP_OFFSET)
 		{
-			JSONObject params = new JSONObject();
+			JsonObject params = new JsonObject();
 			
 			if(command == ToolCommand.TARGET_TEMP)
 			{
@@ -179,7 +177,6 @@ public class PrinterCommand extends OctoPrintCommand {
 	 * 
 	 * @return if this command succeeded
 	 */
-	@SuppressWarnings("unchecked")
 	public boolean moveHome(){
 		OctoPrintHttpRequest request = this.createRequest("printhead");
 		
@@ -189,7 +186,7 @@ public class PrinterCommand extends OctoPrintCommand {
 		//add the options
 		request.addParam("command", "home");
 		
-		JSONArray axis = new JSONArray();
+		JsonArray axis = new JsonArray();
 		axis.add("x");
 		axis.add("y");
 		axis.add("z");

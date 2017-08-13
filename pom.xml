@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.octoprint.api</groupId>
   <artifactId>octoprint-java-lib</artifactId>
-  <version>0.0.4</version>
+  <version>0.0.5</version>
   <name>OctoPrint Java Lib</name>
   <description>Provides Communication with OctoPrint via the REST API in Java</description>
   <url>https://github.com/robweber/octoprint-java-lib/tree/master</url>
@@ -36,7 +36,7 @@
       		<excludePackageNames>com.octoprint.api.test.*</excludePackageNames>
       		<outputDirectory>${project.basedir}/docs</outputDirectory>
       		<links>
-      			<link>http://juliusdavies.ca/json-simple-1.1.1-javadocs/</link>
+      			<link>https://cliftonlabs.github.io/json-simple/target/apidocs/</link>
       		</links>
       	</configuration>
       	<executions>
@@ -53,9 +53,9 @@
   
   <dependencies>
   	<dependency>
-  		<groupId>com.googlecode.json-simple</groupId>
+  		<groupId>com.github.cliftonlabs</groupId>
   		<artifactId>json-simple</artifactId>
-  		<version>1.1.1</version>
+  		<version>2.1.2</version>
   	</dependency>
   	
   	<dependency>
