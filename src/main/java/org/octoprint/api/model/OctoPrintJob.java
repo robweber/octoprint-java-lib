@@ -180,10 +180,6 @@ public final class OctoPrintJob implements Jsonable, JSONLoader {
 		 * @return length in mm
 		 */
 		public Long length(){
-			if(m_json == null || !this.m_json.containsKey("length"))
-			{
-				return null;
-			}
 			try {
 				return this.m_json.getLong("length");
 			} catch(final NullPointerException e) {
@@ -197,10 +193,6 @@ public final class OctoPrintJob implements Jsonable, JSONLoader {
 		 * @return volume in cm³
 		 */
 		public Double volume(){
-			if(m_json == null || !this.m_json.containsKey("volume"))
-			{
-				return null;
-			}
 			try {
 				return this.m_json.getDouble("volume");
 			} catch(final NullPointerException e) {
