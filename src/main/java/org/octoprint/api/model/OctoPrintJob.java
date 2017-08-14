@@ -22,12 +22,12 @@ public final class OctoPrintJob implements Jsonable, JSONLoader {
 	}
 
 	/**
-	 * @return {@code true} if a file is currently loaded, or printing, {@code false} if no file is loaded 
+	 * @return {@code true} if a file is currently loaded, or printing, {@code false} if no file is loaded
 	 */
 	public boolean isFileLoaded(){
 		return this.getName() != null; //if there is a name a file is loaded
 	}
-	
+
 	/**
 	 * @return the name of the file
 	 */
@@ -53,12 +53,12 @@ public final class OctoPrintJob implements Jsonable, JSONLoader {
 	 */
 	public Long getEstimatedPrintTime(){
 		Long result = null;
-		
+
 		if(m_job.get("estimatedPrintTime") != null)
 		{
 			result =  m_job.getLong("estimatedPrintTime");
 		}
-		
+
 		return result;
 	}
 
@@ -76,29 +76,29 @@ public final class OctoPrintJob implements Jsonable, JSONLoader {
 	 * @return filament consumption details
 	 */
 	public FilamentDetails getFilamentDetails(final int toolIndex) {
-		
+
 		JsonObject m_filament = (JsonObject) this.m_job.get("filament");
-		
-		if(m_filament == null) 
+
+		if(m_filament == null)
 		{
 			return null;
 		}
-		
+
 		//multiple extruders have different json layout
-		if(toolIndex != 0 || !(m_filament.containsKey("length") && m_filament.containsKey("volume"))) 
+		if(toolIndex != 0 || !(m_filament.containsKey("length") && m_filament.containsKey("volume")))
 		{
 			m_filament = (JsonObject) m_filament.get("tool"+toolIndex);
 		}
-		
+
 		final FilamentDetails details = new FilamentDetails();
 		details.loadJSON(m_filament);
-		
+
 		return details;
 	}
 
 	@Override
 	public void loadJSON(JsonObject json) {
-		
+
 		m_job = (JsonObject)json.get("job");
 
 		//make sure the progress exists and is not null
@@ -113,7 +113,7 @@ public final class OctoPrintJob implements Jsonable, JSONLoader {
 	public String toJson() {
 		return m_job.toJson();
 	}
-	
+
 	@Override
 	public void toJson(Writer arg0) throws IOException {
 		arg0.write(this.toJson());
@@ -180,11 +180,11 @@ public final class OctoPrintJob implements Jsonable, JSONLoader {
 		 * @return length in mm
 		 */
 		public Long length(){
-			if(!this.m_json.containsKey("length")) 
-			{
+			try {
+				return this.m_json.getLong("length");
+			} catch(final NullPointerException e) {
 				return null;
 			}
-			return this.m_json.getLong("length");
 		}
 
 		/**
@@ -193,12 +193,11 @@ public final class OctoPrintJob implements Jsonable, JSONLoader {
 		 * @return volume in cm³
 		 */
 		public Double volume(){
-			if(!this.m_json.containsKey("volume")) 
-			{
+			try {
+				return this.m_json.getDouble("volume");
+			} catch(final NullPointerException e) {
 				return null;
 			}
-			
-			return this.m_json.getDouble("volume");
 		}
 
 		/**
