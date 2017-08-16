@@ -85,4 +85,12 @@
   	</dependency>
   </dependencies>
   
+  <ciManagement>
+  	<system>Travis CI</system>
+  	<url>https://travis-ci.org/robweber/octoprint-java-lib</url>
+  </ciManagement>
+  <issueManagement>
+  	<system>Github</system>
+  	<url>https://github.com/robweber/octoprint-java-lib/issues</url>
+  </issueManagement>
 </project>
