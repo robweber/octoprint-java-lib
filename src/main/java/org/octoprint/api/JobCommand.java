@@ -58,10 +58,9 @@ public class JobCommand extends OctoPrintCommand {
 	public enum JobState{
 		START("start", null),
 		RESTART("restart", null),
-		PAUSE("pause", null),
-		PAUSE_PAUSE("pause", "pause"),
-		PAUSE_RESUME("pause", "resume"),
-		PAUSE_TOGGLE("pause", "toggle"),
+		PAUSE("pause", "pause"),
+		RESUME("pause", "resume"),
+		TOGGLE("pause", "toggle"),
 		CANCEL("cancel", null);
 
 		private final String command;
