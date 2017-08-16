@@ -11,12 +11,24 @@
       <developer>
           <id>robweber</id>
           <name>Rob Weber</name>
+          <url>https://github.com/robweber</url>
           <roles>
               <role>architect</role>
               <role>developer</role>
           </roles>
       </developer>
   </developers>
+  
+  <contributors>
+    <contributor>
+  		<name>DataWorm</name>
+  		<url>https://github.com/DataWorm</url>
+  		<roles>
+  			<role>code contributor</role>
+  			<role>tester</role>
+  		</roles>
+    </contributor>
+  </contributors>
   
   <build>
     <plugins>
