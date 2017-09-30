@@ -6,7 +6,7 @@
   <name>OctoPrint Java Lib</name>
   <description>Provides Communication with OctoPrint via the REST API in Java</description>
   <url>https://github.com/robweber/octoprint-java-lib/tree/master</url>
-  
+
   <developers>
       <developer>
           <id>robweber</id>
@@ -18,7 +18,7 @@
           </roles>
       </developer>
   </developers>
-  
+
   <contributors>
     <contributor>
   		<name>DataWorm</name>
@@ -29,7 +29,7 @@
   		</roles>
     </contributor>
   </contributors>
-  
+
   <build>
     <plugins>
       <plugin>
@@ -62,21 +62,34 @@
       </plugin>
     </plugins>
   </build>
-  
+
   <dependencies>
   	<dependency>
   		<groupId>com.github.cliftonlabs</groupId>
   		<artifactId>json-simple</artifactId>
   		<version>2.1.2</version>
   	</dependency>
-  	
+
   	<dependency>
   		<groupId>junit</groupId>
   		<artifactId>junit</artifactId>
   		<version>4.12</version>
   		<scope>test</scope>
   	</dependency>
-  	
+
+	<!-- Logging -->
+	<dependency>
+    	<groupId>org.slf4j</groupId>
+    	<artifactId>slf4j-api</artifactId>
+    	<version>1.7.10</version>
+  	</dependency>
+  	<dependency>
+    	<groupId>ch.qos.logback</groupId>
+    	<artifactId>logback-classic</artifactId>
+    	<version>1.1.2</version>
+    	<scope>test</scope>
+  	</dependency>
+
   	<dependency>
   		<groupId>org.mockito</groupId>
   		<artifactId>mockito-core</artifactId>
@@ -84,7 +97,7 @@
   		<scope>test</scope>
   	</dependency>
   </dependencies>
-  
+
   <ciManagement>
   	<system>Travis CI</system>
   	<url>https://travis-ci.org/robweber/octoprint-java-lib</url>
