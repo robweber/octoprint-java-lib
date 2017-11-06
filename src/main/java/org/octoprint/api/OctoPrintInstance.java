@@ -94,7 +94,7 @@ public class OctoPrintInstance {
 		//create the connection and get the result
 		final HttpURLConnection connection = this.createConnection(request);
 
-		final String jsonString = handleConnection(connection);
+		final String jsonString = handleConnection(connection,204);
 
 		if(jsonString != null && !jsonString.isEmpty())
 		{
@@ -111,37 +111,44 @@ public class OctoPrintInstance {
 	protected boolean executeUpdate(OctoPrintHttpRequest request){
 		final HttpURLConnection connection = this.createConnection(request);
 		try {
-			handleConnection(connection);
+			handleConnection(connection,200);
 		} catch(final NoContentException e) {
 			return false;
 		}
 		return true;
 	}
 
-	private String handleConnection(final HttpURLConnection connection) {
+	private String handleConnection(final HttpURLConnection connection, final int successStatus) {
 		final int statusCode;
 		String output;
+		
 		try {
 			statusCode = connection.getResponseCode();
 		}
 		catch (final IOException e) {
 			throw new ConnectionFailedException(e);
 		}
+		
 		try {
 			output = this.getOutput(connection);
 		}
 		catch (final IOException e) {
 			output = null;
 		}
-		if(statusCode==400) {
+		
+		if(statusCode==successStatus) {
 			return output;
 		}
+		
 		if(statusCode== NoContentException.STATUS_CODE) {
 			throw new NoContentException(output);
 		}
+		
 		if(statusCode==InvalidApiKeyException.STATUS_CODE) {
 			throw new InvalidApiKeyException(output);
 		}
+		
+		//catch if no exception matches but no success
 		throw new OctoPrintAPIException(statusCode, output);
 	}
 
