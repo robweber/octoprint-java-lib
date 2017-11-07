@@ -1,5 +1,10 @@
 package org.octoprint.api;
 
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import org.json.simple.JsonObject;
 
 /**
@@ -45,5 +50,38 @@ public class OctoPrintHttpRequest {
 	
 	public boolean hasParams(){
 		return !m_params.isEmpty();
+	}
+	
+	public HttpURLConnection createConnection(URL url, String key) {
+		HttpURLConnection connection = null;
+
+		try{
+
+			URL apiUrl = new URL(m_url + this.getURL());
+			
+			//create the connection
+			connection = (HttpURLConnection)apiUrl.openConnection();
+
+			//set default connection parameters
+			connection.setRequestProperty("X-Api-Key", key);
+			connection.setRequestProperty("Content-Type","application/json");
+			connection.setRequestMethod(this.getType());
+			connection.setDoInput(true);
+			connection.setDoOutput(true);
+
+			if(this.hasParams())
+			{
+				OutputStream os = connection.getOutputStream();
+				os.write(this.getParams().getBytes());
+				os.flush();
+			}
+
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+
+		return connection;
 	}
 }
