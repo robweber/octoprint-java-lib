@@ -1,6 +1,7 @@
 package org.octoprint.api.test;
 
 import static org.junit.Assert.*;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -20,7 +21,7 @@ public class ConnectionCommandTest {
 	public void beforeTest(){
 		//create a fake instance for http simulation
 		OctoPrintInstance i = Mockito.mock(OctoPrintInstance.class,new JSONAnswer("connection_state.json"));
-		
+
 		command = new ConnectionCommand(i);
 	}
 	
