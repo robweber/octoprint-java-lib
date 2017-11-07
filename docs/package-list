@@ -1,3 +1,4 @@
 org.octoprint.api
+org.octoprint.api.exceptions
 org.octoprint.api.model
 org.octoprint.api.util

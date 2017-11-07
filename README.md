@@ -9,6 +9,8 @@ Please note that not all API functions are implemented here but most of them for
 
 The json-simple library is required to encode/decode JSON objects. If you don't want to use maven here is a link: https://github.com/cliftonlabs/json-simple
 
+SL4J is required for logging. https://mvnrepository.com/artifact/org.slf4j/slf4j-api/1.7.10
+
 ## How to Use It
 
 To use it simply create an OctoPrintInstance within your Java code and then use it to initate one of the Command classes.

@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.octoprint.api</groupId>
   <artifactId>octoprint-java-lib</artifactId>
-  <version>0.0.6</version>
+  <version>0.0.7</version>
   <name>OctoPrint Java Lib</name>
   <description>Provides Communication with OctoPrint via the REST API in Java</description>
   <url>https://github.com/robweber/octoprint-java-lib/tree/master</url>
@@ -83,6 +83,7 @@
     	<artifactId>slf4j-api</artifactId>
     	<version>1.7.10</version>
   	</dependency>
+  	
   	<dependency>
     	<groupId>ch.qos.logback</groupId>
     	<artifactId>logback-classic</artifactId>
@@ -96,6 +97,7 @@
   		<version>2.8.47</version>
   		<scope>test</scope>
   	</dependency>
+   	
   </dependencies>
 
   <ciManagement>
