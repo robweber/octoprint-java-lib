@@ -1,10 +1,11 @@
 package org.octoprint.api;
 
 import java.io.BufferedReader;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.json.simple.DeserializationException;
@@ -22,48 +23,20 @@ import org.octoprint.api.exceptions.OctoPrintAPIException;
  *
  */
 public class OctoPrintInstance {
-	private String m_url = null;
+	private URL m_url = null;
 	private String m_key = null;
 
-	public OctoPrintInstance(String host, int port, String apiKey) {
+	public OctoPrintInstance(URL host,String apiKey){
+		m_url = host;
+		m_key = apiKey;
+	}
+	
+	public OctoPrintInstance(String host, int port, String apiKey) throws MalformedURLException {
 		this(host,port,apiKey,"");
 	}
 
-	public OctoPrintInstance(String host, int port, String apiKey, String path){
-		m_url = "http://" + host + ":" + port + path;
-		m_key = apiKey;
-	}
-
-	private HttpURLConnection createConnection(OctoPrintHttpRequest request){
-		HttpURLConnection connection = null;
-
-		try{
-			URL apiUrl = new URL(m_url + request.getURL());
-
-			//create the connection
-			connection = (HttpURLConnection)apiUrl.openConnection();
-
-			//set default connection parameters
-			connection.setRequestProperty("X-Api-Key", m_key);
-			connection.setRequestProperty("Content-Type","application/json");
-			connection.setRequestMethod(request.getType());
-			connection.setDoInput(true);
-			connection.setDoOutput(true);
-
-			if(request.hasParams())
-			{
-				OutputStream os = connection.getOutputStream();
-				os.write(request.getParams().getBytes());
-				os.flush();
-			}
-
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-
-		return connection;
+	public OctoPrintInstance(String host, int port, String apiKey, String path) throws MalformedURLException {
+		this(new URL("http://" + host + ":" + port + path),apiKey);
 	}
 
 	private String getOutput(HttpURLConnection connection)
@@ -88,11 +61,11 @@ public class OctoPrintInstance {
 		return result;
 	}
 
-	protected JsonObject executeQuery(OctoPrintHttpRequest request){
+	public JsonObject executeQuery(OctoPrintHttpRequest request){
 		JsonObject result = null;
 
 		//create the connection and get the result
-		final HttpURLConnection connection = this.createConnection(request);
+		final HttpURLConnection connection = request.createConnection(m_url,m_key);
 
 		final String jsonString = handleConnection(connection,204);
 
@@ -108,8 +81,8 @@ public class OctoPrintInstance {
 		return result;
 	}
 
-	protected boolean executeUpdate(OctoPrintHttpRequest request){
-		final HttpURLConnection connection = this.createConnection(request);
+	public boolean executeUpdate(OctoPrintHttpRequest request){
+		final HttpURLConnection connection = request.createConnection(m_url,m_key);
 		try {
 			handleConnection(connection,200);
 		} catch(final NoContentException e) {
