@@ -57,7 +57,7 @@ public class OctoPrintHttpRequest {
 
 		try{
 
-			URL apiUrl = new URL(m_url + this.getURL());
+			URL apiUrl = new URL(url + this.getURL());
 			
 			//create the connection
 			connection = (HttpURLConnection)apiUrl.openConnection();
