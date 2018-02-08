@@ -67,7 +67,7 @@ public class OctoPrintInstance {
 		//create the connection and get the result
 		final HttpURLConnection connection = request.createConnection(m_url,m_key);
 
-		final String jsonString = handleConnection(connection,204);
+		final String jsonString = handleConnection(connection,200);
 
 		if(jsonString != null && !jsonString.isEmpty())
 		{
@@ -84,7 +84,7 @@ public class OctoPrintInstance {
 	public boolean executeUpdate(OctoPrintHttpRequest request){
 		final HttpURLConnection connection = request.createConnection(m_url,m_key);
 		try {
-			handleConnection(connection,200);
+			handleConnection(connection,204);
 		} catch(final NoContentException e) {
 			return false;
 		}
