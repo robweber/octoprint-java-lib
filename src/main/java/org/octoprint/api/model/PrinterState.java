@@ -22,27 +22,27 @@ public final class PrinterState implements Jsonable, JSONLoader {
 	}
 
 	public boolean isOperational(){
-		return m_json.getBoolean("operational");
+		return m_json.getBooleanOrDefault("operational",false);
 	}
 	
 	public boolean isConnected(){
-		return !m_json.getBoolean("closedOrError");
+		return !m_json.getBooleanOrDefault("closedOrError",true);
 	}
 	
 	public boolean isReady(){
-		return m_json.getBoolean("ready");
+		return m_json.getBooleanOrDefault("ready",false);
 	}
 	
 	public boolean isPrinting(){
-		return m_json.getBoolean("printing");
+		return m_json.getBooleanOrDefault("printing",false);
 	}
 	
 	public boolean isPaused(){
-		return m_json.getBoolean("paused");
+		return m_json.getBooleanOrDefault("paused",false);
 	}
 	
 	public boolean hasError(){
-		return m_json.getBoolean("error");
+		return m_json.getBooleanOrDefault("error",false);
 	}
 	
 	@Override

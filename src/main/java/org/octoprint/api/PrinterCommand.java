@@ -2,6 +2,7 @@ package org.octoprint.api;
 
 import org.json.simple.JsonArray;
 import org.json.simple.JsonObject;
+import org.octoprint.api.exceptions.OctoPrintAPIException;
 import org.octoprint.api.model.Axis;
 import org.octoprint.api.model.PrinterState;
 import org.octoprint.api.model.TemperatureInfo;
@@ -35,13 +36,19 @@ public class PrinterCommand extends OctoPrintCommand {
 	 * @return the current state of the printer 
 	 */
 	public PrinterState getCurrentState(){
-		PrinterState result = null;
+		PrinterState result = new PrinterState();
 		
-		JsonObject json = this.g_comm.executeQuery(this.createRequest());
-		
-		if(json != null)
+		try{
+			JsonObject json = this.g_comm.executeQuery(this.createRequest());
+			
+			if(json != null)
+			{
+				result = JSONUtils.createObject((JsonObject)json.get("state"), PrinterState.class.getName());
+			}
+		}
+		catch(OctoPrintAPIException oi)
 		{
-			result = JSONUtils.createObject((JsonObject)json.get("state"), PrinterState.class.getName());
+			//this might happen, don't do anything, just return empty
 		}
 		
 		return result;

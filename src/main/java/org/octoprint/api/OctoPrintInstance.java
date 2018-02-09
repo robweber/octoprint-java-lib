@@ -83,6 +83,7 @@ public class OctoPrintInstance {
 
 	public boolean executeUpdate(OctoPrintHttpRequest request){
 		final HttpURLConnection connection = request.createConnection(m_url,m_key);
+		
 		try {
 			handleConnection(connection,204);
 		} catch(final NoContentException e) {
