@@ -21,7 +21,7 @@ public class ExceptionTest {
 	private URL testURL = null;
 	private OctoPrintInstance instance = null;
 	private OctoPrintHttpRequest request = null;
-	
+
 	public ExceptionTest() {
 		
 		//create a temp url
@@ -57,7 +57,7 @@ public class ExceptionTest {
 	
 	@Test
 	public void successfulUpdateTest(){
-		HttpURLConnection conn = this.connectionMock(200, "");
+		HttpURLConnection conn = this.connectionMock(204, "");
 		Mockito.when(request.createConnection(testURL, "")).thenReturn(conn);
 		
 		assertTrue(instance.executeUpdate(request));
@@ -65,7 +65,7 @@ public class ExceptionTest {
 	
 	@Test 
 	public void successfulQueryTest(){
-		HttpURLConnection conn = this.connectionMock(204, "{\"connection\":true}");
+		HttpURLConnection conn = this.connectionMock(200, "{\"connection\":true}");
 		Mockito.when(request.createConnection(testURL, "")).thenReturn(conn);
 		
 		assertEquals(instance.executeQuery(request).toJson(),"{\"connection\":true}");
@@ -82,13 +82,13 @@ public class ExceptionTest {
 		
 	}
 	
-	@Test
+	@Test(expected = NoContentException.class)
 	public void nonContentExceptionTest(){
 		HttpURLConnection conn = this.connectionMock(NoContentException.STATUS_CODE, "");
 		Mockito.when(request.createConnection(testURL, "")).thenReturn(conn);
 		
-		//should throw an exception, which is caught and then false returned
-		assertFalse(instance.executeUpdate(request));
+		//should throw an exception
+		instance.executeQuery(request);
 	}
 	
 	@Test(expected = ConnectionFailedException.class)
